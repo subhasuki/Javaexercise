@@ -3,10 +3,12 @@ package mainproject;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class SampleWebpageAutomation {
 
@@ -16,23 +18,21 @@ public class SampleWebpageAutomation {
 		System.setProperty("webdriver.chrome.driver",  "/home/zoho/Downloads/chromedriver");
 //		System.setProperty("webdriver.gecko.driver","/home/zoho/Downloads/geckodriver");
 		
-		WebDriver driver = new ChromeDriver();							
+		WebDriver driver = new ChromeDriver();	
 		driver.manage().window().maximize();
-		
+
+
+        Actions action = new Actions(driver);
         driver.get("https://www.testandquiz.com/selenium/testing.html");
         
-//--------------------------        Link : This is a link		-------------------------------------
-      
-        
-        WebElement heading = driver.findElement(By.xpath("/html/body/div/div[4]/div/p/a")); 	
+//--------------------------    Link : This is a link	------------------------------------- 
+        WebElement heading = driver.findElement(By.xpath("/html/body/div/div[4]/div/p/a")); 
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-    	heading.click();
-    	
-//-------------------------    	Click-able or not  --------------------------------------
-    	
-    	String Actual_URl_1 = "https://www.javatpoint.com/";
-		String Expexted_URL_1 = driver.getCurrentUrl();
-    	
+//    	heading.click();    	
+//-------------------------    	Click-able or not  --------------------------------------  
+    	String Actual_URl_1 = "true";
+		boolean eurl = heading.isEnabled();
+		String Expexted_URL_1 = String.valueOf(eurl);
 		try {
 			Assert.assertEquals(Actual_URl_1,Expexted_URL_1);
 			System.out.println("This link URL Clickable:--Pass-- \n");
@@ -40,10 +40,11 @@ public class SampleWebpageAutomation {
 		catch(Exception e) {
 			System.out.println("This link URL notclickable:--Fail-- \n");
 		}
-		
-		
-		
 //-------------------------    	URL check  --------------------------------------
+        
+        WebElement heading2 = driver.findElement(By.xpath("/html/body/div/div[4]/div/p/a")); 
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        heading2.click();
 		String Actual_URl = "https://www.javatpoint.com/";
 		String Expexted_URL = driver.getCurrentUrl();
 		
@@ -54,28 +55,24 @@ public class SampleWebpageAutomation {
         catch(Exception e){
         	System.out.println("Current URL:--Fail-- \n");
         }
+        driver.navigate().back();
         
 //-------------------------    	URL type  --------------------------------------
         
-        String Actual_URl_type = "a";
-		String Expexted_URL_type = heading.getTagName();
-
-		
-        try{
-        	Assert.assertEquals(Actual_URl_type,Expexted_URL_type);
-        	System.out.println("It's a link tag:--Pass-- \n");
-        }
-        catch(Exception e){
-        	System.out.println("It's a not link tag:--Fail-- \n");
-        }
-        driver.navigate().back();
-        
+        WebElement heading1 = driver.findElement(By.xpath("/html/body/div/div[4]/div/p/a")); 
+        String Expexted_URL_type = heading1.getTagName();
+        String Actual_URl_type = "a";	
+			try{
+				Assert.assertEquals(Actual_URl_type,Expexted_URL_type);
+        		System.out.println("It's a link tag:--Pass-- \n");
+			}
+			catch(Exception e){
+				System.out.println("It's a not link tag:--Fail-- \n");
+			}
+//        driver.navigate().back();
 //--------------------------       Text-box/input-box Module	-------------------------------------
-        
-        
         WebElement fname = driver.findElement(By.cssSelector("#fname"));     
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-                
 //-------------------------------        valid value 	------------------------------------------------
 		
 		fname.click();
@@ -212,7 +209,7 @@ public class SampleWebpageAutomation {
         
 //--------------------------       Male Radio-button Module	-------------------------------------
         
-        WebElement male = driver.findElement(By.cssSelector("#male")); //System.out.println(male.getTagName());
+        WebElement male = driver.findElement(By.cssSelector("#male")); 
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		
 //-------------------------        Radio button Checked Or not	---------------------------------
@@ -307,11 +304,13 @@ public class SampleWebpageAutomation {
    
 //-------------------------        Check-box Module		-----------------------------
         
-        WebElement auto = driver.findElement(By.cssSelector(".Automation")); //System.out.println(female);
+//-------------------------   Automation Testing Check-box  -----------------------------     
+        
+      WebElement auto = driver.findElement(By.cssSelector(".Automation")); 
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
-		auto.click(); //female.clear();
+		auto.click(); 
 		
-//-------------------------    Check-box Checked OR not	-----------------------------
+//-------------------------   Automation Testing Check-box Checked OR not	-----------------------------
 		
 		String Actual_auto = "true";
 		boolean auto_ck =  auto.isSelected();
@@ -340,9 +339,178 @@ public class SampleWebpageAutomation {
 		
 //-------------------------    Check-box disable/enable	-----------------------------
 		
-//		String Actual_ck_disable = "true";
-//		String Ex
+		String Actual_ck_disable = "true";
+		boolean ck_disable = auto.isEnabled();
+		String Expeted_ck_disable = String.valueOf(ck_disable);
+		
+		try {
+        	Assert.assertEquals(Actual_ck_disable,Expeted_ck_disable);	
+			System.out.println("Automation Testing checkbox Enabled:--Pass-- \n");
+		}
+		catch(Exception e) {
+			System.out.println("Automation Testing checkbox Disabled:--Fail-- \n");
+		}
+
+		
         
+      WebElement Performance = driver.findElement(By.cssSelector(".Performance")); //System.out.println(female);
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		Performance.click(); 
+		
+//-------------------------    Check-box Checked OR not	-----------------------------
+		
+		String Actual_Performance = "true";
+		boolean Performance_ck =  Performance.isSelected();
+		String Expexted_Performance = String.valueOf(Performance_ck);
+		
+		try {
+        	Assert.assertEquals(Actual_Performance,Expexted_Performance);	
+			System.out.println("Checked Performance Testing :--Pass-- \n");
+		}
+		catch(Exception e) {
+			System.out.println("UnChecked Performance Testing :--Fail-- \n");
+		}
+		
+//-------------------------    Check-box Checked OR not	-----------------------------
+		
+		String Actual_pf_type = "checkbox";
+		String Expexted_pf_type = Performance.getAttribute("type");
+		
+		try {
+        	Assert.assertEquals(Actual_pf_type,Expexted_pf_type);	
+			System.out.println("It's a Performance Testing checkbox :--Pass-- \n");
+		}
+		catch(Exception e) {
+			System.out.println("It's not a Performance Testing checkbox:--Fail-- \n");
+		}
+		
+//-------------------------    Check-box disable/enable	-----------------------------
+		
+		String Actual_pf_disable = "true";
+		boolean pf_disable = Performance.isEnabled();
+		String Expeted_pf_disable = String.valueOf(pf_disable);
+		
+		try {
+        	Assert.assertEquals(Actual_pf_disable,Expeted_pf_disable);	
+			System.out.println("Performance Testing checkbox Enabled:--Pass-- \n");
+		}
+		catch(Exception e) {
+			System.out.println("Performance Testing checkbox Disabled:--Fail-- \n");
+		}
+		
+//-------------------------    Multiple check-box check	-----------------------------	
+		
+		Performance.click();
+		auto.click(); 
+		System.out.println("Pass Multiplecheck");
+		
+		String Actual_mul = "true";
+		String Expeted_mul = String.valueOf(pf_disable);
+		
+		try {
+        	Assert.assertEquals(Actual_pf_disable,Expeted_pf_disable);	
+			System.out.println(" Performance Testing checkbox Enabled:--Pass-- \n");
+		}
+		catch(Exception e) {
+			System.out.println("Performance Testing checkbox Disabled:--Fail-- \n");
+		}
+		driver.navigate().refresh();
+		
+		
+	
+//-------------------------    Double click	-----------------------------		
+		try {	
+			WebElement ele = driver.findElement(By.xpath("//*[@id=\"dblClkBtn\"]")); 
+       driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//			Thread.sleep(1000);
+//			System.out.println(dbclk);
+			if(ele.isEnabled()) {
+				Thread.sleep(3000);
+//				((Actions) ele).doubleClick();
+				action.moveToElement(driver.findElement(By.xpath("//*[@id=\"dblClkBtn\"]"))).doubleClick().build().perform();
+				Thread.sleep(2000);
+			} else {
+				System.out.println(ele);
+			}
+			
+			String ActualData = "hi, JavaTpoint Testing";
+			String ExpectedData = driver.switchTo().alert().getText();
+		} catch(Exception e) {
+			System.out.println(e);
+		}		
+//-------------------------    Double click	Type-----------------------------
+		try {
+			WebElement ele = driver.findElement(By.xpath("//*[@id=\"dblClkBtn\"]")); 
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+			String Actual_btn_type = "button";
+			String Expected_btn_type = ele.getTagName();
+			Assert.assertEquals(Actual_btn_type,Expected_btn_type);
+			System.out.println("It's a Double click button:---Pass---");
+		}
+		catch(Exception e) {
+			System.out.println("It's not a Double click button:---Fail---");	
+		}
+//-------------------------    Double click	Button Click-able/or not-----------------------------
+		try {
+			WebElement ele = driver.findElement(By.xpath("//*[@id=\"dblClkBtn\"]")); 
+			ele.click();
+			String Actual_btn_click = "true";
+			boolean btn_enable = ele.isEnabled();
+			String Expected_btn_click = String.valueOf(btn_enable);
+			Assert.assertEquals(Actual_btn_click,Expected_btn_click);
+			System.out.println("Double click button is clickable:---Pass--");
+		}
+		catch(Exception e) {
+			System.out.println("Double click button i not clickable:---Fail---");	
+		}		
+//-------------------------    Generate Alert box-----------------------------
+		try {
+			WebElement alert_box = driver.findElement(By.xpath("/html/body/div/div[11]/div/p/button"));
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			alert_box.click();
+			String Actual_Alert = "hi, JavaTpoint Testing";
+			String Expected_Alert = driver.switchTo().alert().getText();
+			Assert.assertEquals(Actual_Alert,Expected_Alert);
+			System.out.println("Generate Alert box Accept:pass");
+		} catch(Exception e) {
+			System.out.println("Generate Alert box not Accept:pass");
+		}		
+		
+		
+//-------------------------    Generate Confirm box(Cancel button)-----------------------------
+		try {
+			WebElement alert_box1 = driver.findElement(By.xpath("/html/body/div/div[12]/div/p[1]/button"));
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			Thread.sleep(2000);
+			alert_box1.click();
+			driver.switchTo().alert().dismiss();
+			String Actual_Alert_cancel = "You pressed Cancel!";
+			String Expected_Alert1_cancel = driver.findElement(By.xpath("//*[@id=\"demo\"]")).getText();		
+//			System.out.println(Expected_Alert1_cnfrm);
+			Assert.assertEquals(Actual_Alert_cancel,Expected_Alert1_cancel);
+			System.out.println("Generate confrim box Cancel:Pass");
+		} catch(Exception e) {
+			System.out.println("Generate Alert box not Cancle:Fail");
+		}		
+		
+//-------------------------    Generate Confirm box(OK button)-----------------------------		
+		
+		try {
+			WebElement alert_box1 = driver.findElement(By.xpath("/html/body/div/div[12]/div/p[1]/button"));
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+			Thread.sleep(2000);
+			alert_box1.click();
+			driver.switchTo().alert().accept();
+			String Actual_Alert_cnfrm = "You pressed OK!";
+			String Expected_Alert_cnfrm = driver.findElement(By.xpath("//*[@id=\"demo\"]")).getText();		
+//			System.out.println(Expected_Alert_cnfrm);
+			Assert.assertEquals(Actual_Alert_cnfrm,Expected_Alert_cnfrm);
+			System.out.println("Generate Alert box OK Accept:Pass");
+		} catch(Exception e) {
+			System.out.println("Generate Alert box OK not Accept:Fail");
+		}
+		
         driver.quit();
 	}
 	
