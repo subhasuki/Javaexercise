@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -351,7 +352,7 @@ public class ToolssiteTestcase {
 	
 	//-----------------------------		3.< Radio Button >	-----------------------------
 	@Test
-	public void radio() {
+	public void Radio() {
 		WebElement radio =this.css_selector("#item-2");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		radio.click();
@@ -387,7 +388,7 @@ public class ToolssiteTestcase {
 	}
 	//---------------------------		5.< Buttons >		-------------------------------
 	@Test
-	public void buttons() throws InterruptedException {
+	public void DoubleClick() throws InterruptedException {
 		WebElement btn =this.css_selector("#item-4");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btn);
@@ -402,17 +403,30 @@ public class ToolssiteTestcase {
 		String Actual_dblclk ="You have done a double click";
 		String Expected_dblclk=this.css_selector("#doubleClickMessage").getText();
 		assertEquals(Actual_dblclk,Expected_dblclk);
-		
+	}
 		//--------------------------	Right Click		----------------------------------------
+	@Test
+	public void RightCLick() throws InterruptedException {
+		WebElement btn =this.css_selector("#item-4");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btn);
+		btn.click();
 		
 		WebElement rtclk =this.css_selector("#rightClickBtn");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		Actions act = new Actions(driver);
 		act.contextClick(rtclk).perform();
 		String Actual_rtclk ="You have done a right click";
 		String Expected_rtclk=this.css_selector("#rightClickMessage").getText();
 		assertEquals(Actual_rtclk,Expected_rtclk);
-		
+	}
 		//--------------------------	Click Me		----------------------------------------
+	@Test
+	public void ClickMe() throws InterruptedException {
+		WebElement btn =this.css_selector("#item-4");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", btn);
+		btn.click();
 		
 		this.xpath_locator("//button[normalize-space()='Click Me']").click();
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -424,7 +438,7 @@ public class ToolssiteTestcase {
 	//----------------------------		6.< Links >	-------------------------------------------
 	
 	@Test
-	public void links() throws InterruptedException {
+	public void HomeLinks() throws InterruptedException {
 		WebElement links =this.css_selector("#item-5");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
@@ -437,39 +451,60 @@ public class ToolssiteTestcase {
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		homelink.click();
 		Thread.sleep(2000);
-		String mainW = driver.getWindowHandle();
-		Set<String> mainW1 = driver.getWindowHandles();
-		for (String allwindow:mainW1) {
-			if (!allwindow.equalsIgnoreCase(mainW)) {
-				driver.switchTo().window(allwindow);
-				String url=  driver.getCurrentUrl();
-				System.out.println(url);
-				driver.close();
-		}
-
-			}
-		
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs2.get(1));
+		Thread.sleep(3000);
+		driver.close();
+		driver.switchTo().window(tabs2.get(0));
+//		String mainW = driver.getWindowHandle();
+//		Set<String> mainW1 = driver.getWindowHandles();
+//		for (String allwindow:mainW1) {
+//			if (!allwindow.equalsIgnoreCase(mainW)) {
+//				driver.switchTo().window(allwindow);
+//				String url=  driver.getCurrentUrl();
+////				System.out.println(url);
+//				driver.close();
+//		}
+//
+//			}
+	}
 		//--------------------------	Home Dynamic link	-----------------------------------------
+	@Test
+	public void HomeDynamicLinks() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
-		//		WebElement activeElement = driver.switchTo().activeElement(); 
-		//		String id = activeElement.getAttribute("id");
 		WebElement homedynamic= this.css_selector("#dynamicLink");		
-		System.out.println(homedynamic);
 		homedynamic.click();
-		Thread.sleep(3000);	
-		String main1 = driver.getWindowHandle();
-		Set<String> mains1 = driver.getWindowHandles();	
-		for (String allwindow:mainW1) {
-			if (!allwindow.equalsIgnoreCase(mainW)) {
-				driver.switchTo().window(allwindow);
-				String url=  driver.getCurrentUrl();
-				System.out.println(url);
-				driver.close();
-		}
-			}
-		Thread.sleep(1000);
+		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs2.get(1));
+		Thread.sleep(4000);
+		driver.close();
+		driver.switchTo().window(tabs2.get(0));
 		
+//		Thread.sleep(1000);	
+//		Set<String> mainW1 = driver.getWindowHandles();
+//		String mainW = driver.getWindowHandle();
+//		for (String allwindow:mainW1) {
+//			if (!allwindow.equalsIgnoreCase(mainW)) {
+//				driver.switchTo().window(allwindow);
+//				String url=  driver.getCurrentUrl();
+////				System.out.println(url);
+//				driver.close();
+//		}
+//			}
+	}
 		//--------------------------	Created		-----------------------------------------
+	@Test
+	public void Created() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement created =this.css_selector("#created");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -478,8 +513,16 @@ public class ToolssiteTestcase {
 		String Expected_create=this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 		System.out.println(Expected_create);	
 		assertEquals(Actual_create,Expected_create);
+	}
 		
 		//--------------------------	No Content		-----------------------------------------	
+	@Test
+	public void NoContent() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement content =this.css_selector("#no-content");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -489,8 +532,15 @@ public class ToolssiteTestcase {
 		String Expected_content =this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 		System.out.println(Expected_content);			
 		assertEquals(Actual_content,Expected_content);
-		
+	}
 		//--------------------------	Moved		-----------------------------------------
+	@Test
+	public void Moved() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement moved =this.css_selector("#moved");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -499,8 +549,15 @@ public class ToolssiteTestcase {
 		String Actual_moved ="301";
 		String Expected_moved =this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 		assertEquals(Actual_moved,Expected_moved);
-		
+	}
 		//--------------------------	Bad Request		-----------------------------------------
+	@Test
+	public void BadRequest() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement badrequest =this.css_selector("#bad-request");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -510,8 +567,15 @@ public class ToolssiteTestcase {
 		String Expected_badrequest =this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 		System.out.println(Expected_badrequest);			
 		assertEquals(Actual_badrequest,Expected_badrequest);
-		
+	}
 		//--------------------------	Unauthorized		-----------------------------------------	
+	@Test
+	public void Unauthorized() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement unauthorized =this.css_selector("#unauthorized");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -521,8 +585,15 @@ public class ToolssiteTestcase {
 		String Actual_Unauthorized ="401";
 		String Expected_Unauthorized =this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 		assertEquals(Actual_Unauthorized,Expected_Unauthorized);
-		
+	}
 		//--------------------------	Forbidden		-----------------------------------------
+	@Test
+	public void Forbidden() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement Forbidden =this.css_selector("#forbidden");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -532,8 +603,15 @@ public class ToolssiteTestcase {
 		String Expected_Forbidden =this.xpath_locator("//*[@id=\"linkResponse\"]/b[1]").getText();
 		System.out.println(Expected_Forbidden);		
 		assertEquals(Actual_Forbidden,Expected_Forbidden);
-		
+	}
 		//--------------------------	Not Found		-----------------------------------------	
+	@Test
+	public void NotFound() throws InterruptedException {
+		WebElement links =this.css_selector("#item-5");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
+		links.click();
+		Thread.sleep(2000);
 		
 		WebElement notfound =this.css_selector("#invalid-url");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
@@ -548,7 +626,7 @@ public class ToolssiteTestcase {
 	//		--------------------------	7.< Broken links-images > -------------------------------------
 	
 	@Test
-	public void brokenimages() throws InterruptedException {
+	public void Validimg() throws InterruptedException {
 		WebElement brokelink =this.css_selector("#item-6");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brokelink);
@@ -559,14 +637,19 @@ public class ToolssiteTestcase {
 		WebElement validimg =this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/img[1]");
 		Boolean p = (Boolean) ((JavascriptExecutor)driver) .executeScript("return arguments[0].complete " + "&& typeof arguments[0].naturalWidth != \"undefined\" " + "&& arguments[0].naturalWidth > 0", validimg);
 
-
 			if (p) {
 				System.out.println("Tools logo present");
 			} else {
 				System.out.println("Tools logo not present");
 			}
-		
+	}
 		//-------------------------------		Broken image		----------------------------------------
+	@Test
+	public void BrokenImages() throws InterruptedException {
+		WebElement brokelink =this.css_selector("#item-6");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brokelink);
+		brokelink.click();
 		
 		WebElement brokeimg =this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/img[2]");
 		Boolean p1 = (Boolean) ((JavascriptExecutor)driver) .executeScript("return arguments[0].complete " + "&& typeof arguments[0].naturalWidth != \"undefined\" " + "&& arguments[0].naturalWidth > 0", brokeimg);
@@ -577,8 +660,14 @@ public class ToolssiteTestcase {
 			} else {
 				System.out.println("Image is not present");
 			}
-		
+	}
 		//-------------------------------		Valid link		----------------------------------------
+	@Test
+	public void ValidLink() throws InterruptedException {
+		WebElement brokelink =this.css_selector("#item-6");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brokelink);
+		brokelink.click();
 		
 		WebElement validlink =this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/a[1]");
 		System.out.println(validlink);
@@ -590,8 +679,14 @@ public class ToolssiteTestcase {
 		String Expect_vlink =driver.getCurrentUrl();
 		assertEquals(Actual_vlink,Expect_vlink);
 		driver.navigate().back();
-		
+	}
 		//-------------------------------		Broken link		----------------------------------------
+	@Test
+	public void BrokenLink() throws InterruptedException {
+		WebElement brokelink =this.css_selector("#item-6");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", brokelink);
+		brokelink.click();
 		
 		WebElement invalidlink =this.xpath_locator("//*[@id=\"app\"]/div/div/div[2]/div[2]/div[1]/a[2]");
 		System.out.println(invalidlink.getTagName());
@@ -605,7 +700,7 @@ public class ToolssiteTestcase {
 			}
 			driver.navigate().back();
 	}		
-	
+
 	//-----------------------------	8.< Download & Upload >	----------------------------------------
 	
 	@Test
@@ -625,9 +720,15 @@ public class ToolssiteTestcase {
 		String Actual_dwd = "sampleFile.jpeg";
 		String Expected_dwd =this.xpath_locator("//a[@download='sampleFile.jpeg']").getAttribute("download");
 		assertEquals(Actual_dwd,Expected_dwd);
-		
+	}
 		//-----------------------------		click Upload	----------------------------------------
-		
+	@Test
+	public void Upload() throws InterruptedException{
+		WebElement clkdwd =this.css_selector("#item-7");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", clkdwd);
+		clkdwd.click();
+			
 		WebElement upload =this.css_selector("#uploadFile");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		upload.sendKeys("/home/zoho/Downloads/sampleFile.jpeg");
@@ -704,12 +805,17 @@ public class ToolssiteTestcase {
 		addclk.click();
 				
 		WebElement mfname =this.Min_val("#firstName");
-		Thread.sleep(1000);
 		String act_fname ="qw";
 		assertEquals(act_fname,mfname.getAttribute("value"));
 		
 		WebElement submitclk =this.Submit_BtnClk("#submit");
-		submitclk.click();
+		submitclk.click();		
+		Thread.sleep(1000);
+		String Expect_min_clr = mfname.getCssValue("border-color"); 
+		String Actual_min_clr = "rgb(40, 167, 69)";
+		assertEquals(Expect_min_clr,Actual_min_clr);
+		String act_mfname ="qw";
+		assertEquals(act_mfname,mfname.getAttribute("value"));
 		
 		WebElement max_fname =this.Max_val("#firstName");
 		Thread.sleep(1000);
@@ -718,6 +824,7 @@ public class ToolssiteTestcase {
 		assertEquals(Expect_max_clr,Actual_max_clr);
 		String act_max_fname ="qwertyuiopasdfghjklzxcvbnm";
 		assertNotEquals(act_max_fname,max_fname.getAttribute("value"));
+		
 		
 		WebElement num_fname =this.Num_val("#firstName");
 		Thread.sleep(1000);
@@ -749,6 +856,17 @@ public class ToolssiteTestcase {
 		String Actual_empty_fname = "rgb(40, 167, 69)";
 		assertNotEquals("Empty Filed",Expect_empty_fname,Actual_empty_fname);
 		
+		WebElement no_str_fname =this.css_selector("#firstName");
+		no_str_fname.click();
+		no_str_fname.clear();
+		no_str_fname.sendKeys("Subha123");
+		Thread.sleep(1000);
+		String Expect_no_str_fname = no_str_fname.getCssValue("border-color"); 
+		String Actual_no_str_fname = "rgb(40, 167, 69)";
+		assertNotEquals("Valid value",Expect_no_str_fname,Actual_no_str_fname);
+		String act_no_str_fname ="Subha123";
+		assertEquals(act_no_str_fname,no_str_fname.getAttribute("value"));
+		
 		WebElement valid_fname =this.css_selector("#firstName");
 		valid_fname.click();
 		valid_fname.clear();
@@ -773,12 +891,16 @@ public class ToolssiteTestcase {
 		addclk.click();
 		
 		WebElement mlname =this.Min_val("#lastName");
-		Thread.sleep(1000);
-		String act_min_fname ="qw";
-		assertEquals(act_min_fname,mlname.getAttribute("value"));
 		
 		WebElement submitclk =this.Submit_BtnClk("#submit");
 		submitclk.click();
+		Thread.sleep(1000);
+		
+		String Expect_min_lclr = mlname.getCssValue("border-color"); 
+		String Actual_min_lclr = "rgb(40, 167, 69)";
+		assertEquals(Expect_min_lclr,Actual_min_lclr);
+		String act_mlname ="qw";
+		assertEquals(act_mlname,mlname.getAttribute("value"));
 		
 		WebElement max_lname =this.Max_val("#lastName");
 		Thread.sleep(1000);
@@ -799,8 +921,7 @@ public class ToolssiteTestcase {
 		WebElement Spl_fname =this.Spl_char("#lastName");
 		Thread.sleep(1000);
 		String Expect_Spl_lname = Spl_fname.getCssValue("border-color"); 
-		String Actual_Spl_lname = "rgb(40, 167, 69)";
-		
+		String Actual_Spl_lname = "rgb(40, 167, 69)";		
 		assertNotEquals("You must type letters",Expect_Spl_lname,Actual_Spl_lname);
 		String act_spl_fname ="!@#$%^&*()<>?:[]`,.,.<>/`~";
 		assertEquals(act_spl_fname,Spl_fname.getAttribute("value"));
@@ -819,6 +940,17 @@ public class ToolssiteTestcase {
 		String Actual_empty_lname = "rgb(40, 167, 69)";
 		assertNotEquals("Empty Filed",Expect_empty_lname,Actual_empty_lname);
 		
+		WebElement no_str_lname =this.css_selector("#lastName");
+		no_str_lname.click();
+		no_str_lname.clear();
+		no_str_lname.sendKeys("Subha123");
+		Thread.sleep(1000);
+		String Expect_no_str_lname = no_str_lname.getCssValue("border-color"); 
+		String Actual_no_str_lname = "rgb(40, 167, 69)";
+		assertNotEquals("Valid value",Expect_no_str_lname,Actual_no_str_lname);
+		String act_no_str_fname ="Subha123";
+		assertEquals(act_no_str_fname,no_str_lname.getAttribute("value"));
+		
 		WebElement valid_lname =this.css_selector("#lastName");
 		valid_lname.click();
 		valid_lname.clear();
@@ -827,23 +959,39 @@ public class ToolssiteTestcase {
 		String Expect_valid_lname = valid_lname.getCssValue("border-color"); 
 		String Actual_valid_lname = "rgb(40, 167, 69)";
 		assertNotEquals("Valid value",Expect_valid_lname,Actual_valid_lname);
-		String act_valid_fname ="Subha";
-		assertEquals(act_valid_fname,valid_lname.getAttribute("value"));
+		String act_valid_lname ="Subha";
+		assertEquals(act_valid_lname,valid_lname.getAttribute("value"));
 		
-	
-
 	}
 	
 	//-----------------------------		Email		-------------------------------------
 	@Test
 	public void Email() throws InterruptedException{
-		WebElement mumail =this.Min_val("#userEmail:invalid");
+		WebElement webclk =this.css_selector("#item-3");
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", webclk);
+		webclk.click();
+		
+		WebElement addclk =this.xpath_locator("//*[@id=\"addNewRecordButton\"]");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		addclk.click();
+		
+		WebElement mumail =this.css_selector("#userEmail");
+		mumail.click();
+		mumail.clear();
+		mumail.sendKeys("a@gmail.com");
 		Thread.sleep(1000);
+		
+		WebElement submitclk =this.Submit_BtnClk("#submit");
+		submitclk.click();
+		
 		String Actual_mumail_clr ="rgb(40, 167, 69)";
 		String Expect_mumail_clr=mumail.getCssValue("border-color");
 		assertNotEquals(Actual_mumail_clr,Expect_mumail_clr);
+		String act_mumail ="a@gmail.com";
+		assertEquals(act_mumail,mumail.getAttribute("value"));
 		
-		WebElement max_umail =this.css_selector("#userEmail:invalid");
+		WebElement max_umail =this.css_selector("#userEmail");
 		max_umail.click();
 		max_umail.clear();
 		max_umail.sendKeys("qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnm@gmail.com");
@@ -851,19 +999,82 @@ public class ToolssiteTestcase {
 		String Actual_max_umail_clr ="rgb(40, 167, 69)";
 		String Expect_max_umail_clr=max_umail.getCssValue("border-color");
 		assertNotEquals("Max char -> it is a invalid Email",Actual_max_umail_clr,Expect_max_umail_clr);
-				
+		
+		WebElement num_email =this.css_selector("#userEmail");
+		num_email.click();
+		num_email.clear();
+		num_email.sendKeys("123456789012345678901234567890@gmail.com");
+		Thread.sleep(1000);
+		String Expect_num_email= num_email.getCssValue("border-color"); 
+		String Actual_num_email= "rgb(40, 167, 69)";
+		assertNotEquals("You must type letters",Expect_num_email,Actual_num_email);
+		String act_num_lname ="123456789012345678901234567890@gmail.com";
+		assertEquals(act_num_lname,num_email.getAttribute("value"));
+		
+		WebElement Spl_email =this.css_selector("#userEmail");
+		Spl_email.click();
+		Spl_email.clear();
+		Spl_email.sendKeys("wer!#$%^&*()<>?:[]`,.,.<>/`~@gmail.com");
+		Thread.sleep(1000);
+		String Expect_Spl_email = Spl_email.getCssValue("border-color"); 
+		String Actual_Spl_email= "rgb(40, 167, 69)";
+		
+		assertNotEquals("You must type letters",Expect_Spl_email,Actual_Spl_email);
+		String act_spl_fname ="wer!#$%^&*()<>?:[]`,.,.<>/`~@gmail.com";
+		assertEquals("Pass->Invalid Email",act_spl_fname,Spl_email.getAttribute("value"));
+		
+		WebElement blkqt_email =this.css_selector("#userEmail");
+		blkqt_email.click();
+		blkqt_email.clear();
+		blkqt_email.sendKeys("````````````````````@gmail.com");
+		Thread.sleep(1000);
+		String Expect_blkqt_email = blkqt_email.getCssValue("border-color"); 
+		String Actual_blkqt_email = "rgb(40, 167, 69)";
+		assertNotEquals("Not Accept Block Quotes",Expect_blkqt_email,Actual_blkqt_email);
+		String act_blk_email ="````````````````````@gmail.com";
+		assertEquals(act_blk_email,blkqt_email.getAttribute("value"));
+		
+		WebElement empty_email =this.EmptyField("#userEmail");
+		Thread.sleep(1000);
+		String Expect_empty_email = empty_email.getCssValue("border-color"); 
+		String Actual_empty_email = "rgb(40, 167, 69)";
+		assertNotEquals("Empty Filed",Expect_empty_email,Actual_empty_email);
+		
+		WebElement valid_email =this.css_selector("#userEmail");
+		valid_email.click();
+		valid_email.clear();
+		valid_email.sendKeys("Subha@gmail.com");
+		Thread.sleep(1000);
+		String Expect_valid_email = valid_email.getCssValue("border-color"); 
+		String Actual_valid_email = "rgb(40, 167, 69)";
+		assertNotEquals("Valid value",Expect_valid_email,Actual_valid_email);
+		String act_valid_email ="Subha@gmail.com";
+		assertEquals(act_valid_email,valid_email.getAttribute("value"));
 	}
 	
 	//-----------------------------		Age		-------------------------------------
 	@Test
 	public void Age() throws InterruptedException{
-		WebElement mage =this.Min_val("#age:invalid");
-		Thread.sleep(1000);
+		WebElement webclk =this.css_selector("#item-3");
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", webclk);
+		webclk.click();
+		
+		WebElement addclk =this.xpath_locator("//*[@id=\"addNewRecordButton\"]");
+		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		addclk.click();
+		
+		WebElement mage =this.Min_val("#age");	
+		WebElement submitclk =this.Submit_BtnClk("#submit");
+		submitclk.click();
+		Thread.sleep(1000);	
 		String Actual_mage_clr ="rgb(40, 167, 69)";
 		String Expect_mage_clr=mage.getCssValue("border-color");
 		assertNotEquals(Actual_mage_clr,Expect_mage_clr);
+		String act_valid_fname ="qw";
+		assertEquals(act_valid_fname,mage.getAttribute("value"));
 		
-		WebElement max_age =this.css_selector("#age:invalid");
+		WebElement max_age =this.css_selector("#age");
 		max_age.click();
 		max_age.clear();
 		max_age.sendKeys("123");
@@ -871,18 +1082,67 @@ public class ToolssiteTestcase {
 		String Actual_max_age_clr ="rgb(40, 167, 69)";
 		String Expect_max_age_clr=max_age.getCssValue("border-color");
 		assertEquals(Actual_max_age_clr,Expect_max_age_clr);
+		String act_max_age ="123";
+		assertEquals(act_max_age,max_age.getAttribute("value"));
+		
+		WebElement zero_age =this.css_selector("#age");
+		zero_age.click();
+		zero_age.clear();
+		zero_age.sendKeys("0");
+		Thread.sleep(1000);
+		String Actual_zero_age_clr ="rgb(40, 167, 69)";
+		String Expect_zero_age_clr=zero_age.getCssValue("border-color");
+		assertEquals(Actual_zero_age_clr,Expect_zero_age_clr);
+		String act_zero_age ="0";
+		assertEquals(act_zero_age,zero_age.getAttribute("value"));
+		
+		WebElement valid_age =this.css_selector("#age");
+		valid_age.click();
+		valid_age.clear();
+		valid_age.sendKeys("22");
+		Thread.sleep(1000);
+		String Expect_valid_age = valid_age.getCssValue("border-color"); 
+		String Actual_valid_age = "rgb(40, 167, 69)";
+		assertNotEquals("Valid value",Expect_valid_age,Actual_valid_age);
+		String act_valid_age ="22";
+		assertEquals(act_valid_age,valid_age.getAttribute("value"));
+		
 	}
-	
+		
 	//-------------------------------	Salary	--------------------------------------------------- 
 		@Test
 		public void Salary() throws InterruptedException{
-			WebElement msalary =this.Min_val("#salary:invalid");
-			Thread.sleep(1000);
-			String Actual_msalary_clr ="rgb(40, 167, 69)";
-			String Expect_msalary_clr=msalary.getCssValue("border-color");
-			assertNotEquals(Actual_msalary_clr,Expect_msalary_clr);
+			WebElement webclk =this.css_selector("#item-3");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", webclk);
+			webclk.click();
 			
-			WebElement max_salary =this.css_selector("#salary:invalid");
+			WebElement addclk =this.xpath_locator("//*[@id=\"addNewRecordButton\"]");
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+			addclk.click();
+			
+			WebElement msalary =this.Min_val("#salary");	
+			WebElement submitclk =this.Submit_BtnClk("#submit");
+			submitclk.click();
+			Thread.sleep(1000);	
+			String Expect_min_salary = msalary.getCssValue("border-color"); 
+			String Actual_min_salary = "rgb(40, 167, 69)";
+			assertNotEquals(Expect_min_salary,Actual_min_salary);
+			String act_msalary ="qw";
+			assertEquals(act_msalary,msalary.getAttribute("value"));
+			
+			WebElement min_salary =this.css_selector("#salary");
+			min_salary.click();
+			min_salary.clear();
+			min_salary.sendKeys("1");
+			Thread.sleep(1000);
+			String Actual_min_salary_clr ="rgb(40, 167, 69)";
+			String Expect_min_salary_clr=min_salary.getCssValue("border-color");
+			assertEquals(Actual_min_salary_clr,Expect_min_salary_clr);
+			String act_min_salary ="1";
+			assertEquals(act_min_salary,min_salary.getAttribute("value"));
+			
+			WebElement max_salary =this.css_selector("#salary");
 			max_salary.click();
 			max_salary.clear();
 			max_salary.sendKeys("12345678901");
@@ -890,30 +1150,185 @@ public class ToolssiteTestcase {
 			String Actual_max_salary_clr ="rgb(40, 167, 69)";
 			String Expect_max_salary_clr=max_salary.getCssValue("border-color");
 			assertEquals(Actual_max_salary_clr,Expect_max_salary_clr);
+			String act_max_salary ="1234567890";
+			assertEquals(act_max_salary,max_salary.getAttribute("value"));
+			
+			WebElement valid_salary =this.css_selector("#salary");
+			valid_salary.click();
+			valid_salary.clear();
+			valid_salary.sendKeys("2500000");
+			Thread.sleep(1000);
+			String Expect_valid_salary = valid_salary.getCssValue("border-color"); 
+			String Actual_valid_salary = "rgb(40, 167, 69)";
+			assertNotEquals("Valid value",Expect_valid_salary,Actual_valid_salary);
+			String act_valid_salary ="2500000";
+			assertEquals(act_valid_salary,valid_salary.getAttribute("value"));
 			
 		}
 //-------------------------------	Department	--------------------------------------------------- 
 		@Test
 		public void Department() throws InterruptedException{
-			WebElement mdepartment =this.Min_val("#department:invalid");
-			Thread.sleep(1000);
+			WebElement webclk =this.css_selector("#item-3");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", webclk);
+			webclk.click();
+			
+			WebElement addclk =this.xpath_locator("//*[@id=\"addNewRecordButton\"]");
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+			addclk.click();
+			
+			WebElement mdepartment =this.Min_val("#department");
+			WebElement submitclk =this.Submit_BtnClk("#submit");
+			submitclk.click();
+			Thread.sleep(2000);
 			String Actual_mdepartment_clr ="rgb(40, 167, 69)";
 			String Expect_mdepartment_clr=mdepartment.getCssValue("border-color");
+			System.out.println(Expect_mdepartment_clr);
 			assertEquals(Actual_mdepartment_clr,Expect_mdepartment_clr);
-			Thread.sleep(2000);
+			String act_msalary ="qw";
+			assertEquals(act_msalary,mdepartment.getAttribute("value"));
 			
-			WebElement max_department =this.Max_val("#department:invalid");
+			
+			WebElement max_department =this.Max_val("#department");
 			Thread.sleep(1000);
 			String Actual_max_department_clr ="rgb(40, 167, 69)";
 			String Expect_max_department_clr=max_department.getCssValue("border-color");
 			assertEquals(Actual_max_department_clr,Expect_max_department_clr);
+			
+			WebElement num_dep =this.Num_val("#department");
+			Thread.sleep(1000);
+			String Expect_num_dep = num_dep.getCssValue("border-color"); 
+			String Actual_num_dep = "rgb(40, 167, 69)";
+			assertNotEquals("You must type letters",Expect_num_dep,Actual_num_dep);
+			String act_num_dep ="123456789012345678901234567890";
+			assertEquals(act_num_dep,num_dep.getAttribute("value"));
+			
+			WebElement Spl_dep =this.Spl_char("#department");
+			Thread.sleep(1000);
+			String Expect_Spl_dep = Spl_dep.getCssValue("border-color"); 
+			String Actual_Spl_dep = "rgb(40, 167, 69)";		
+			assertNotEquals("You must type letters",Expect_Spl_dep,Actual_Spl_dep);
+			String act_spl_dep ="!@#$%^&*()<>?:[]`,.,.<>/`~";
+			assertEquals(act_spl_dep,Spl_dep.getAttribute("value"));
+			
+			WebElement blkqt_dep =this.block_quote("#department");
+			Thread.sleep(1000);
+			String Expect_blkqt_dep = blkqt_dep.getCssValue("border-color"); 
+			String Actual_blkqt_dep = "rgb(40, 167, 69)";
+			assertNotEquals("Not Accept Block Quotes",Expect_blkqt_dep,Actual_blkqt_dep);
+			String act_blk_dep ="````````````````````";
+			assertEquals(act_blk_dep,blkqt_dep.getAttribute("value"));
+			
+			WebElement empty_dep =this.EmptyField("#department");
+			Thread.sleep(1000);
+			String Expect_empty_dep = empty_dep.getCssValue("border-color"); 
+			String Actual_empty_dep= "rgb(40, 167, 69)";
+			assertNotEquals("Empty Filed",Expect_empty_dep,Actual_empty_dep);
+			
+			WebElement no_str_dep =this.css_selector("#department");
+			no_str_dep.click();
+			no_str_dep.clear();
+			no_str_dep.sendKeys("Computer Science123");
+			Thread.sleep(1000);
+			String Expect_no_str_dep = no_str_dep.getCssValue("border-color"); 
+			String Actual_no_str_dep = "rgb(40, 167, 69)";
+			assertNotEquals("Valid value",Expect_no_str_dep,Actual_no_str_dep);
+			String act_no_str_dep ="Computer Science123";
+			assertEquals(act_no_str_dep,no_str_dep.getAttribute("value"));
+			
+			WebElement valid_dep =this.css_selector("#department");
+			valid_dep.click();
+			valid_dep.clear();
+			valid_dep.sendKeys("Computer Science");
+			Thread.sleep(1000);
+			String Expect_valid_dep = valid_dep.getCssValue("border-color"); 
+			String Actual_valid_dep = "rgb(40, 167, 69)";
+			assertNotEquals("Valid value",Expect_valid_dep,Actual_valid_dep);
+			String act_valid_dep ="Computer Science";
+			assertEquals(act_valid_dep,valid_dep.getAttribute("value"));
+		}
+		
+//-------------------------------	Submit Data --------------------------------------------------- 
+		@Test
+		public void AddData() throws InterruptedException{
+			WebElement webclk =this.css_selector("#item-3");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", webclk);
+			webclk.click();
+			
+			WebElement addclk =this.xpath_locator("//*[@id=\"addNewRecordButton\"]");
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+			addclk.click();
+			
+			WebElement valid_fname1 =this.css_selector("#firstName");
+			valid_fname1.click();
+			valid_fname1.clear();
+			valid_fname1.sendKeys("Subha");
+			String act_valid_fname1 ="Subha";
+			assertEquals(act_valid_fname1,valid_fname1.getAttribute("value"));
+			
+			WebElement valid_lname =this.css_selector("#lastName");
+			valid_lname.click();
+			valid_lname.clear();
+			valid_lname.sendKeys("suki");
+			String act_valid_lname ="suki";
+			assertEquals(act_valid_lname,valid_lname.getAttribute("value"));
+			
+			WebElement valid_email =this.css_selector("#userEmail");
+			valid_email.click();
+			valid_email.clear();
+			valid_email.sendKeys("Subha@gmail.com");
+			String act_valid_email ="Subha@gmail.com";
+			assertEquals(act_valid_email,valid_email.getAttribute("value"));
+			
+			WebElement valid_age =this.css_selector("#age");
+			valid_age.click();
+			valid_age.clear();
+			valid_age.sendKeys("22");
+			String act_valid_age ="22";
+			assertEquals(act_valid_age,valid_age.getAttribute("value"));
+			
+			WebElement valid_salary =this.css_selector("#salary");
+			valid_salary.click();
+			valid_salary.clear();
+			valid_salary.sendKeys("2500000");
+			String act_valid_salary ="2500000";
+			assertEquals(act_valid_salary,valid_salary.getAttribute("value"));
+			
+			WebElement valid_dep =this.css_selector("#department");
+			valid_dep.click();
+			valid_dep.clear();
+			valid_dep.sendKeys("Computer Science");
+			String act_valid_dep ="Computer Science";
+			assertEquals(act_valid_dep,valid_dep.getAttribute("value"));
+			
+			WebElement submitclk1 =this.Submit_BtnClk("#submit");
+			submitclk1.click();
+//			Thread.sleep(5000);
+			
+//			WebElement tbllist =this.xpath_locator("//div[text()='Kierra']");
+//			System.out.println(tbllist);
+//			
+//			WebElement tbllist1 =this.css_selector(".rt-tbody>div:last-child");
+//			System.out.println(tbllist1);
+		}
+		
+//-----------------------------------		Search box		--------------------------------
+		@Test
+		public void Searchbox() throws InterruptedException{
+			
+			WebElement search =this.css_selector("#searchBox");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			search.click();
+			search.clear();
+			search.sendKeys("a");
 		}
 	
 	//-------------------------------		Quit				-----------------------------------------	
-//	@After
-//	public void quitfun() {
-//		driver.quit();
-//	}
+	@After
+	public void quitfun() {
+		driver.quit();
+	}
 
 
 }
