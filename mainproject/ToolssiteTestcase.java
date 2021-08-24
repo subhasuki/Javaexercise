@@ -104,7 +104,7 @@ public class ToolssiteTestcase {
 			numip = driver.findElement(By.cssSelector(numval));
 			numip.click();
 			numip.clear();
-			numip.sendKeys("123456789012345678901234567890");			
+			numip.sendKeys("1234567890123456789012345");			
 		}
 		catch(AssertionError e) {
 			System.out.println(e);
@@ -120,7 +120,7 @@ public class ToolssiteTestcase {
 			splcharip = driver.findElement(By.cssSelector(splchar));
 			splcharip.click();
 			splcharip.clear();
-			splcharip.sendKeys("!@#$%^&*()<>?:[]`,.,.<>/`~");			
+			splcharip.sendKeys("!@#$%^&*()<>?:[]`,.<>/`~");			
 		}
 		catch(AssertionError e) {
 			System.out.println(e);
@@ -561,6 +561,7 @@ public class ToolssiteTestcase {
 		
 		WebElement badrequest =this.css_selector("#bad-request");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
 		badrequest.click();
 		Thread.sleep(2000);
 		String Actual_badrequest ="400";
@@ -597,6 +598,7 @@ public class ToolssiteTestcase {
 		
 		WebElement Forbidden =this.css_selector("#forbidden");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
 		Forbidden.click();
 		Thread.sleep(2000);
 		String Actual_Forbidden ="403";
@@ -615,6 +617,7 @@ public class ToolssiteTestcase {
 		
 		WebElement notfound =this.css_selector("#invalid-url");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", links);
 		notfound.click();
 		Thread.sleep(2000);
 		String Actual_notfound ="404";
@@ -715,8 +718,6 @@ public class ToolssiteTestcase {
 		WebElement download =this.css_selector("#downloadButton");
 		driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
 		download.click();
-		String Actual_download = "file";
-		assertEquals(Actual_download,download.getAttribute("type"));
 		String Actual_dwd = "sampleFile.jpeg";
 		String Expected_dwd =this.xpath_locator("//a[@download='sampleFile.jpeg']").getAttribute("download");
 		assertEquals(Actual_dwd,Expected_dwd);
@@ -831,7 +832,7 @@ public class ToolssiteTestcase {
 		String Expect_num_clr = num_fname.getCssValue("border-color"); 
 		String Actual_num_clr = "rgb(40, 167, 69)";
 		assertNotEquals("You must type letters",Expect_num_clr,Actual_num_clr);
-		String act_num_fname ="123456789012345678901234567890";
+		String act_num_fname ="1234567890123456789012345";
 		assertEquals(act_num_fname,num_fname.getAttribute("value"));
 		
 		WebElement Spl_fname =this.Spl_char("#firstName");
@@ -839,7 +840,7 @@ public class ToolssiteTestcase {
 		String Expect_Spl_fname = Spl_fname.getCssValue("border-color"); 
 		String Actual_Spl_fname = "rgb(40, 167, 69)";
 		assertNotEquals("You must type letters",Expect_Spl_fname,Actual_Spl_fname);
-		String act_spl_fname ="!@#$%^&*()<>?:[]`,.,.<>/`~";
+		String act_spl_fname ="!@#$%^&*()<>?:[]`,.<>/`~";
 		assertEquals(act_spl_fname,Spl_fname.getAttribute("value"));
 		
 		WebElement blkqt_fname =this.block_quote("#firstName");
@@ -910,27 +911,27 @@ public class ToolssiteTestcase {
 		String act_max_lname ="qwertyuiopasdfghjklzxcvbnm";
 		assertNotEquals(act_max_lname,max_lname.getAttribute("value"));
 		
-		WebElement num_lname =this.Num_val("#lastName");
+		WebElement num_lname =this.Num_val("#lastName");	
 		Thread.sleep(1000);
 		String Expect_num_lclr = num_lname.getCssValue("border-color"); 
 		String Actual_num_lclr = "rgb(40, 167, 69)";
-		assertNotEquals("You must type letters",Expect_num_lclr,Actual_num_lclr);
-		String act_num_lname ="123456789012345678901234567890";
+		assertEquals("You must type letters",Expect_num_lclr,Actual_num_lclr);
+		String act_num_lname ="1234567890123456789012345";
 		assertEquals(act_num_lname,num_lname.getAttribute("value"));
 		
 		WebElement Spl_fname =this.Spl_char("#lastName");
 		Thread.sleep(1000);
 		String Expect_Spl_lname = Spl_fname.getCssValue("border-color"); 
 		String Actual_Spl_lname = "rgb(40, 167, 69)";		
-		assertNotEquals("You must type letters",Expect_Spl_lname,Actual_Spl_lname);
-		String act_spl_fname ="!@#$%^&*()<>?:[]`,.,.<>/`~";
+		assertEquals("You must type letters",Expect_Spl_lname,Actual_Spl_lname);
+		String act_spl_fname ="!@#$%^&*()<>?:[]`,.<>/`~";
 		assertEquals(act_spl_fname,Spl_fname.getAttribute("value"));
 		
 		WebElement blkqt_lname =this.block_quote("#lastName");
 		Thread.sleep(1000);
 		String Expect_blkqt_lname = blkqt_lname.getCssValue("border-color"); 
 		String Actual_blkqt_lname = "rgb(40, 167, 69)";
-		assertNotEquals("Not Accept Block Quotes",Expect_blkqt_lname,Actual_blkqt_lname);
+		assertEquals("Not Accept Block Quotes",Expect_blkqt_lname,Actual_blkqt_lname);
 		String act_blk_lname ="````````````````````";
 		assertEquals(act_blk_lname,blkqt_lname.getAttribute("value"));
 		
@@ -943,23 +944,23 @@ public class ToolssiteTestcase {
 		WebElement no_str_lname =this.css_selector("#lastName");
 		no_str_lname.click();
 		no_str_lname.clear();
-		no_str_lname.sendKeys("Subha123");
+		no_str_lname.sendKeys("suki123");
 		Thread.sleep(1000);
 		String Expect_no_str_lname = no_str_lname.getCssValue("border-color"); 
 		String Actual_no_str_lname = "rgb(40, 167, 69)";
 		assertNotEquals("Valid value",Expect_no_str_lname,Actual_no_str_lname);
-		String act_no_str_fname ="Subha123";
+		String act_no_str_fname ="suki123";
 		assertEquals(act_no_str_fname,no_str_lname.getAttribute("value"));
 		
 		WebElement valid_lname =this.css_selector("#lastName");
 		valid_lname.click();
 		valid_lname.clear();
-		valid_lname.sendKeys("Subha");
+		valid_lname.sendKeys("suki");
 		Thread.sleep(1000);
 		String Expect_valid_lname = valid_lname.getCssValue("border-color"); 
 		String Actual_valid_lname = "rgb(40, 167, 69)";
 		assertNotEquals("Valid value",Expect_valid_lname,Actual_valid_lname);
-		String act_valid_lname ="Subha";
+		String act_valid_lname ="suki";
 		assertEquals(act_valid_lname,valid_lname.getAttribute("value"));
 		
 	}
@@ -1082,7 +1083,7 @@ public class ToolssiteTestcase {
 		String Actual_max_age_clr ="rgb(40, 167, 69)";
 		String Expect_max_age_clr=max_age.getCssValue("border-color");
 		assertEquals(Actual_max_age_clr,Expect_max_age_clr);
-		String act_max_age ="123";
+		String act_max_age ="12";
 		assertEquals(act_max_age,max_age.getAttribute("value"));
 		
 		WebElement zero_age =this.css_selector("#age");
@@ -1195,12 +1196,12 @@ public class ToolssiteTestcase {
 			String Expect_max_department_clr=max_department.getCssValue("border-color");
 			assertEquals(Actual_max_department_clr,Expect_max_department_clr);
 			
-			WebElement num_dep =this.Num_val("#department");
+			WebElement num_dep =this.Num_val("#department");		
 			Thread.sleep(1000);
 			String Expect_num_dep = num_dep.getCssValue("border-color"); 
 			String Actual_num_dep = "rgb(40, 167, 69)";
 			assertNotEquals("You must type letters",Expect_num_dep,Actual_num_dep);
-			String act_num_dep ="123456789012345678901234567890";
+			String act_num_dep ="1234567890123456789012345";
 			assertEquals(act_num_dep,num_dep.getAttribute("value"));
 			
 			WebElement Spl_dep =this.Spl_char("#department");
@@ -1208,7 +1209,7 @@ public class ToolssiteTestcase {
 			String Expect_Spl_dep = Spl_dep.getCssValue("border-color"); 
 			String Actual_Spl_dep = "rgb(40, 167, 69)";		
 			assertNotEquals("You must type letters",Expect_Spl_dep,Actual_Spl_dep);
-			String act_spl_dep ="!@#$%^&*()<>?:[]`,.,.<>/`~";
+			String act_spl_dep ="!@#$%^&*()<>?:[]`,.<>/`~";
 			assertEquals(act_spl_dep,Spl_dep.getAttribute("value"));
 			
 			WebElement blkqt_dep =this.block_quote("#department");
@@ -1301,27 +1302,52 @@ public class ToolssiteTestcase {
 			valid_dep.sendKeys("Computer Science");
 			String act_valid_dep ="Computer Science";
 			assertEquals(act_valid_dep,valid_dep.getAttribute("value"));
+	
+			WebElement subclk1 = driver.findElement(By.cssSelector("#submit"));
+			System.out.println(subclk1.getTagName());
+			subclk1.click();		
 			
-			WebElement submitclk1 =this.Submit_BtnClk("#submit");
-			submitclk1.click();
-//			Thread.sleep(5000);
-			
-//			WebElement tbllist =this.xpath_locator("//div[text()='Kierra']");
-//			System.out.println(tbllist);
-//			
-//			WebElement tbllist1 =this.css_selector(".rt-tbody>div:last-child");
-//			System.out.println(tbllist1);
+			String tbllist =this.xpath_locator("//div[text()='Subha']").getText();
+			String actual_tbllist ="Subha";
+			assertEquals(actual_tbllist,tbllist);
+
 		}
 		
 //-----------------------------------		Search box		--------------------------------
 		@Test
 		public void Searchbox() throws InterruptedException{
+			WebElement webclk =this.css_selector("#item-3");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", webclk);
+			webclk.click();
 			
 			WebElement search =this.css_selector("#searchBox");
 			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 			search.click();
 			search.clear();
-			search.sendKeys("a");
+			search.sendKeys("K");
+			String search_val =this.xpath_locator("//div[text()='Kierra']").getText();
+			String actual_search ="Kierra";
+			assertEquals(search_val,actual_search);
+			
+			WebElement search1 =this.css_selector("#searchBox");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			search1.click();
+			search1.clear();
+			search1.sendKeys("in");
+			String search_val1 =this.xpath_locator("//div[text()='Insurance']").getText();
+			String actual_search1 ="Insurance";
+			assertEquals(search_val1,actual_search1);
+			
+			WebElement search2 =this.css_selector("#searchBox");
+			driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+			search2.click();
+			search2.clear();
+			search2.sendKeys("n@");
+			String search_val2 =this.xpath_locator("//div[text()='alden@example.com']").getText();
+			String actual_search2 ="alden@example.com";
+			assertEquals(search_val2,actual_search2);
+			
 		}
 	
 	//-------------------------------		Quit				-----------------------------------------	
@@ -1332,3 +1358,4 @@ public class ToolssiteTestcase {
 
 
 }
+
