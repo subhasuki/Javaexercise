@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<project default="testng">
+ 
+ <path id="cp">
+   <pathelement location="lib/testng-testng-7.4.0.jar"/>
+   <pathelement location="/home/zoho/lib"/>
+ </path>
+ 
+ <taskdef name="testng" classpathref="cp"
+          classname="TestNG_Java_file" />
+ 
+ <target name="testng">
+   <testng classpathref="cp" groups="fast">
+     <classfileset includes="TestNG_Java_file"/>
+   </testng>
+ </target>
+ 
+</project>
+
+<!-- <test name="testng">
+	<classes>
+		<class name="TestNG_Java_file"/>
+	<classes>
+</test> -->
