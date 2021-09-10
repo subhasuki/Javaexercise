@@ -15,12 +15,12 @@ describe('Jquery Site', function () {
     // .closeWindow();
   }),
 
-  test('Window position', function (browser) {
-    // Retrieve the attributes
-    browser.getWindowPosition(function (value) {
-      console.log("Window position: " + value);
-    });
-  }),
+    test('Window position', function (browser) {
+      // Retrieve the attributes
+      browser.getWindowPosition(function (value) {
+        console.log("Window position: " + value);
+      });
+    }),
 
     xtest('Accordion', function (browser) {
       browser
@@ -77,19 +77,19 @@ describe('Jquery Site', function () {
         .useCss()
         .frame(0)
         .findElement('.widget')
-        .useXpath()        
+        .useXpath()
         .click('//button[text()="A button element"]')
         .pause(5000)
-        .expect.element('//button[text()="A button element"]').to.have.css('background').which.contains|matches('rgb(0, 127, 255)')
-        // console.log(clr)
-        // console.log(clr.value)
-        const gclr = clr.value
-        console.log("sdfghjk")
-        console.log('Border Color'+gclr)
-        assert('1px solid rgb(0,62,255)', clr.value);
-    }), 
+        .expect.element('//button[text()="A button element"]').to.have.css('background').which.contains | matches('rgb(0, 127, 255)')
+      // console.log(clr)
+      // console.log(clr.value)
+      const gclr = clr.value
+      console.log("sdfghjk")
+      console.log('Border Color' + gclr)
+      assert('1px solid rgb(0,62,255)', clr.value);
+    }),
 
-    xtest('CheckBox Radio',async function(browser){
+    xtest('CheckBox Radio', function (browser) {
       browser
         .maximizeWindow()
         .url("https://jqueryui.com/demos/")
@@ -101,81 +101,81 @@ describe('Jquery Site', function () {
         .frame(0)
         .findElement('.widget')
         .useXpath()
-        
+
         // - - - - - - - -     [ Radio Button ]   - - - - - - - -
 
         // .waitForElementPresent('//label[@for="radio-1"]')
         .click('//label[@for="radio-1"]')
-        var getbg = browser.getCssProperty('//label[@for="radio-1"]', 'background')
-        // browser.assert.cssProperty('//label[@for="radio-1"]', "background", "rgb(0, 127, 255");
-        assert('rgb(0, 127, 255', getbg.value)
+      var getbg = browser.getCssProperty('//label[@for="radio-1"]', 'background')
+      // browser.assert.cssProperty('//label[@for="radio-1"]', "background", "rgb(0, 127, 255");
+      assert('rgb(0, 127, 255', getbg.value)
 
-        // .waitForElementPresent('//label[@for="radio-2"]')
-        browser.click('//label[@for="radio-2"]')
-        var getbg1 = browser.getCssProperty('//label[@for="radio-2"]', 'background')
-        assert('rgb(0, 127, 255', getbg1.value)
+      // .waitForElementPresent('//label[@for="radio-2"]')
+      browser.click('//label[@for="radio-2"]')
+      var getbg1 = browser.getCssProperty('//label[@for="radio-2"]', 'background')
+      assert('rgb(0, 127, 255', getbg1.value)
 
-        // .waitForElementPresent('//label[@for="radio-3"]')
-        browser.click('//label[@for="radio-3"]')
-        var getbg2 = browser.getCssProperty('//label[@for="radio-3"]', 'background')
-        assert('rgb(0, 127, 255', getbg2.value)
+      // .waitForElementPresent('//label[@for="radio-3"]')
+      browser.click('//label[@for="radio-3"]')
+      var getbg2 = browser.getCssProperty('//label[@for="radio-3"]', 'background')
+      assert('rgb(0, 127, 255', getbg2.value)
 
-        // - - - - - - - -     [ Check Box ]   - - - - - - - -
+      // - - - - - - - -     [ Check Box ]   - - - - - - - -
 
-        // .waitForElementPresent('//label[@for="checkbox-1"]')
-        browser.click('//label[@for="checkbox-1"]')
-        var getbg_ck = browser.getCssProperty('//label[@for="checkbox-1"]', 'background')
-        assert('rgb(0, 127, 255', getbg_ck.value)
+      // .waitForElementPresent('//label[@for="checkbox-1"]')
+      browser.click('//label[@for="checkbox-1"]')
+      var getbg_ck = browser.getCssProperty('//label[@for="checkbox-1"]', 'background')
+      assert('rgb(0, 127, 255', getbg_ck.value)
 
-        // .waitForElementPresent('//label[@for="checkbox-2"]')
-        browser.click('//label[@for="checkbox-2"]')
-        var getbg1_ck = browser.getCssProperty('//label[@for="checkbox-2"]', 'background')
-        assert('rgb(0, 127, 255', getbg1_ck.value)
-        browser.expect.element('//label[@for="checkbox-2"]').to.not.be.selected;
+      // .waitForElementPresent('//label[@for="checkbox-2"]')
+      browser.click('//label[@for="checkbox-2"]')
+      var getbg1_ck = browser.getCssProperty('//label[@for="checkbox-2"]', 'background')
+      assert('rgb(0, 127, 255', getbg1_ck.value)
+      browser.expect.element('//label[@for="checkbox-2"]').to.not.be.selected;
 
-        // .waitForElementPresent('//label[@for="checkbox-3"]')
-        browser.click('//label[@for="checkbox-3"]')
-        var getbg2_ck = browser.getCssProperty('//label[@for="checkbox-3"]', 'background')
-        assert('rgb(0, 127, 255', getbg2_ck.value)
+      // .waitForElementPresent('//label[@for="checkbox-3"]')
+      browser.click('//label[@for="checkbox-3"]')
+      var getbg2_ck = browser.getCssProperty('//label[@for="checkbox-3"]', 'background')
+      assert('rgb(0, 127, 255', getbg2_ck.value)
 
-        // .waitForElementPresent('//label[@for="checkbox-4"]')
-        browser.click('//label[@for="checkbox-4"]')
-        var getbg3_ck = browser.getCssProperty('//label[@for="checkbox-4"]', 'background')
-        assert('rgb(0, 127, 255', getbg3_ck.value)
+      // .waitForElementPresent('//label[@for="checkbox-4"]')
+      browser.click('//label[@for="checkbox-4"]')
+      var getbg3_ck = browser.getCssProperty('//label[@for="checkbox-4"]', 'background')
+      assert('rgb(0, 127, 255', getbg3_ck.value)
 
-        // - - - - - - - -     [ Div Scroll ]   - - - - - - - -
+      // - - - - - - - -     [ Div Scroll ]   - - - - - - - -
 
-        browser.useCss()
-        var scr = browser.findElement('.widget')
-        scr.scrollDown = 500
+      browser.useCss()
+      var scr = browser.findElement('.widget')
+      scr.scrollDown = 500
 
-        // - - - - - - - -     [ Check Box nested in label ]   - - - - - - - -
+      // - - - - - - - -     [ Check Box nested in label ]   - - - - - - - -
 
-        browser.useXpath()
-        // .waitForElementPresent('//label[@for="checkbox-1"]')
-        browser.click('//label[@for="checkbox-nested-1"]')
-        var getbg_ckn = browser.getCssProperty('//label[@for="checkbox-nested-1"]', 'background')
-        assert('rgb(0, 127, 255', getbg_ckn.value)
+      browser.useXpath()
+      // .waitForElementPresent('//label[@for="checkbox-1"]')
+      browser.click('//label[@for="checkbox-nested-1"]')
+      var getbg_ckn = browser.getCssProperty('//label[@for="checkbox-nested-1"]', 'background')
+      assert('rgb(0, 127, 255', getbg_ckn.value)
 
-        // .waitForElementPresent('//label[@for="checkbox-2"]')
-        browser.click('//label[@for="checkbox-nested-2"]')
-        var getbg1_ckn = browser.getCssProperty('//label[@for="checkbox-nested-2"]', 'background')
-        assert('rgb(0, 127, 255', getbg1_ckn.value)
-        browser.expect.element('//label[@for="checkbox-nested-2"]').to.not.be.selected;
+      // .waitForElementPresent('//label[@for="checkbox-2"]')
+      browser.click('//label[@for="checkbox-nested-2"]')
+      var getbg1_ckn = browser.getCssProperty('//label[@for="checkbox-nested-2"]', 'background')
+      assert('rgb(0, 127, 255', getbg1_ckn.value)
+      browser.expect.element('//label[@for="checkbox-nested-2"]').to.not.be.selected;
 
-        // .waitForElementPresent('//label[@for="checkbox-3"]')
-        browser.click('//label[@for="checkbox-nested-3"]')
-        var getbg2_ckn = browser.getCssProperty('//label[@for="checkbox-nested-3"]', 'background')
-        assert('rgb(0, 127, 255', getbg2_ckn.value)
+      // .waitForElementPresent('//label[@for="checkbox-3"]')
+      browser.click('//label[@for="checkbox-nested-3"]')
+      var getbg2_ckn = browser.getCssProperty('//label[@for="checkbox-nested-3"]', 'background')
+      assert('rgb(0, 127, 255', getbg2_ckn.value)
 
-        // .waitForElementPresent('//label[@for="checkbox-4"]')
-        browser.click('//label[@for="checkbox-nested-4"]')
-        var getbg3_ckn = browser.getCssProperty('//label[@for="checkbox-nested-4"]', 'background')
-        assert('rgb(0, 127, 255', getbg3_ckn.value)
-    }), 
+      // .waitForElementPresent('//label[@for="checkbox-4"]')
+      browser.click('//label[@for="checkbox-nested-4"]')
+      var getbg3_ckn = browser.getCssProperty('//label[@for="checkbox-nested-4"]', 'background')
+      assert('rgb(0, 127, 255', getbg3_ckn.value)
+    }),
 
-    test('Controlgroup', function(browser){
-      browser
+    xtest('Controlgroup', async function (browser) {
+      await browser
         .maximizeWindow()
         .url("https://jqueryui.com/demos/")
         .execute('scrollTo(0,500)')
@@ -185,97 +185,338 @@ describe('Jquery Site', function () {
         .frame(0)
         .findElement('.widget')
         .useCss()
-        .assert.containsText('#car-type-button', 'Compact car')
-
-        // .click('#car-type-button')
-        // .click('select#car-type>option:nth-child(2) option[value=Compact car]')
-        // var cm =browser.findElement('select#car-type>option:nth-child(1)')
-        // cm.click
-        // var gcm = cm.getText()
-        // console.log(gcm)
-        // browser.assert.containsText('select#car-type>option:nth-child(2)','Midsize car')
+        .click('#car-type-button')
 
         .useXpath()
-        browser.click('//label[@for="transmission-standard"]')
-        var stand = browser.getCssProperty('//label[@for="transmission-standard"]', 'background')
-        assert('rgb(0, 127, 255', stand.value)
+        .click('//*[@id="ui-id-2"]')
+        .useCss()
+      var opt_ast = await browser.getText('.ui-selectmenu-text')
+      assert(opt_ast, 'Midsize car')
 
-        browser.click('//label[@for="transmission-automatic"]')
-        var automat = browser.getCssProperty('//label[@for="transmission-automatic"]', 'background')
-        assert('rgb(0, 127, 255', automat.value)
-
-        browser.click('//label[@for="insurance"]')
-        var insurance = browser.getCssProperty('//label[@for="insurance"]', 'background')
-        assert('rgb(0, 127, 255', insurance.value)
-
-        browser.useCss()
-        browser.click('input#horizontal-spinner')
-        browser.clearValue('input#horizontal-spinner')
-        browser.setValue('input#horizontal-spinner','-2')
-        var cars = browser.getText('input#horizontal-spinner')
-        assert(cars,'-2')
-
-        browser.click('input#horizontal-spinner')
-        browser.clearValue('input#horizontal-spinner')
-        browser.setValue('input#horizontal-spinner','1')
-        var car1 = browser.getText('input#horizontal-spinner')
-        assert(car1,'1')
-        
-        browser.click('input#horizontal-spinner')
-        browser.clearValue('input#horizontal-spinner')
-        browser.setValue('input#horizontal-spinner','1000')
-        var cars2 = browser.getText('input#horizontal-spinner')
-        assert(cars2,'1000')
-
-        browser.useXpath()
-        browser.waitForElementPresent("//button[text()='Book Now!']")
-        browser.click("//button[text()='Book Now!']")
-        var booknow = browser.getCssProperty("//button[text()='Book Now!']", 'background')
-        assert('rgb(0, 127, 255', booknow.value)
+        .useXpath()
+        .click('//*[@id="ui-id-3]')
+        .useCss()
+      var opt_ast1 = await browser.getText('.ui-selectmenu-text')
+      assert(opt_ast1, 'Full size car')
 
 
-        browser.click('//label[@for="transmission-standard-v"]')
-        var standv = browser.getCssProperty('//label[@for="transmission-standard"]', 'background')
-        assert('rgb(0, 127, 255', standv.value)
 
-        browser.click('//label[@for="transmission-automatic-v"]')
-        var automatv = browser.getCssProperty('//label[@for="transmission-automatic"]', 'background')
-        assert('rgb(0, 127, 255', automatv.value)
+        // - - - - - - - -     [ Drop Down ]   - - - - - - - -
 
-        browser.click('//label[@for="insurance-v"]')
-        var insurance = browser.getCssProperty('//label[@for="insurance-v"]', 'background')
-        assert('rgb(0, 127, 255', insurance.value)
+        .click('#car-type-button')
+        .click('select#car-type>option:nth-child(2) option[value=Compact car]')
+      var cm = browser.findElement('select#car-type>option:nth-child(1)')
+      cm.click
+      var gcm = cm.getText()
+      console.log(gcm)
+      browser.assert.containsText('select#car-type>option:nth-child(2)', 'Midsize car')
 
-        // - - - - - - - -     [ Div Scroll ]   - - - - - - - -
+        // - - - - - - - -     [ Radio And checkbox ]   - - - - - - - -
 
-        browser.useCss()
-        var scr = browser.findElement('.widget')
-        scr.scrollDown = 500
+      .useXpath()
+      browser.click('//label[@for="transmission-standard"]')
+      var stand = browser.getCssProperty('//label[@for="transmission-standard"]', 'background')
+      assert('rgb(0, 127, 255', stand.value)
 
-        browser.useCss()
-        browser.click('input#vertical-spinner')
-        browser.clearValue('input#vertical-spinner')
-        browser.setValue('input#vertical-spinner','-2')
-        var cars = browser.getText('input#vertical-spinner')
-        assert(cars,'-2')
+      browser.click('//label[@for="transmission-automatic"]')
+      var automat = browser.getCssProperty('//label[@for="transmission-automatic"]', 'background')
+      assert('rgb(0, 127, 255', automat.value)
 
-        browser.click('input#vertical-spinner')
-        browser.clearValue('input#vertical-spinner')
-        browser.setValue('input#vertical-spinner','1')
-        var car1 = browser.getText('input#vertical-spinner')
-        assert(car1,'1')
-        
-        browser.click('input#vertical-spinner')
-        browser.clearValue('input#vertical-spinner')
-        browser.setValue('input#vertical-spinner','1000')
-        var cars2 = browser.getText('input#vertical-spinner')
-        assert(cars2,'1000')
+      browser.click('//label[@for="insurance"]')
+      var insurance = browser.getCssProperty('//label[@for="insurance"]', 'background')
+      assert('rgb(0, 127, 255', insurance.value)
 
-        browser.useXpath()
-        browser.waitForElementPresent("//button[@id='book']")
-        browser.click("//button[@id='book']")
-        var booknow = browser.getCssProperty("//button[@id='book']", 'background')
-        assert('rgb(0, 127, 255', booknow.value)
+      // - - - - - - - -     [ Number of cars ]   - - - - - - - -
+
+      browser.useCss()
+      browser.click('input#horizontal-spinner')
+      browser.clearValue('input#horizontal-spinner')
+      browser.setValue('input#horizontal-spinner', '-2')
+      var cars = browser.getText('input#horizontal-spinner')
+      assert(cars, '-2')
+
+      browser.click('input#horizontal-spinner')
+      browser.clearValue('input#horizontal-spinner')
+      browser.setValue('input#horizontal-spinner', '-2')
+      browser.click("a.ui-spinner-down")
+      browser.timeoutsImplicitWait(10000)
+      var cars_sp = browser.getText('input#horizontal-spinner')
+      assert.notEqual(cars_sp, '-2')
+
+      browser.click('input#horizontal-spinner')
+      browser.clearValue('input#horizontal-spinner')
+      browser.setValue('input#horizontal-spinner', '1')
+      var car1 = browser.getText('input#horizontal-spinner')
+      assert(car1, '1')
+
+      browser.click('input#horizontal-spinner')
+      browser.clearValue('input#horizontal-spinner')
+      browser.setValue('input#horizontal-spinner', '1')
+      browser.click("a.ui-spinner-up")
+      browser.timeoutsImplicitWait(10000)
+      var car1_sp = browser.getText('input#horizontal-spinner')
+      assert(car1_sp, '2')
+
+      browser.click('input#horizontal-spinner')
+      browser.clearValue('input#horizontal-spinner')
+      browser.setValue('input#horizontal-spinner', '1000')
+      var cars2 = browser.getText('input#horizontal-spinner')
+      assert(cars2, '1000')
+
+      // - - - - - - - -     [ BookNow ]   - - - - - - - -
+
+      browser.useXpath()
+      browser.waitForElementPresent("//button[text()='Book Now!']")
+      browser.click("//button[text()='Book Now!']")
+      var booknow = browser.getCssProperty("//button[text()='Book Now!']", 'background')
+      assert('rgb(0, 127, 255', booknow.value)
+
+      // - - - - - - - -     [ Radio And checkbox Vertical]   - - - - - - - -
+
+      browser.click('//label[@for="transmission-standard-v"]')
+      var standv = browser.getCssProperty('//label[@for="transmission-standard"]', 'background')
+      assert('rgb(0, 127, 255', standv.value)
+
+      browser.click('//label[@for="transmission-automatic-v"]')
+      var automatv = browser.getCssProperty('//label[@for="transmission-automatic"]', 'background')
+      assert('rgb(0, 127, 255', automatv.value)
+
+      browser.click('//label[@for="insurance-v"]')
+      var insurance = browser.getCssProperty('//label[@for="insurance-v"]', 'background')
+      assert('rgb(0, 127, 255', insurance.value)
+
+      // - - - - - - - -     [ Div Scroll ]   - - - - - - - -
+
+      browser.useCss()
+      var scr = browser.findElement('.widget')
+      scr.scrollDown = 500
+
+      // - - - - - - - -     [ Radio And checkbox ]   - - - - - - - -
+
+      browser.useCss()
+      browser.click('input#vertical-spinner')
+      browser.clearValue('input#vertical-spinner')
+      browser.setValue('input#vertical-spinner', '-2')
+      var cars = browser.getText('input#vertical-spinner')
+      assert(cars, '-2')
+
+      browser.click('input#vertical-spinner')
+      browser.clearValue('input#vertical-spinner')
+      browser.setValue('input#vertical-spinner', '-2')
+      browser.click("a.ui-spinner-down")
+      browser.timeoutsImplicitWait(10000)
+      var cars_sp1 = browser.getText('input#vertical-spinner')
+      assert.notEqual(cars_sp1, '-2')
+
+      browser.click('input#vertical-spinner')
+      browser.clearValue('input#vertical-spinner')
+      browser.setValue('input#vertical-spinner', '1')
+      var car1 = browser.getText('input#vertical-spinner')
+      assert(car1, '1')
+
+      browser.click('input#vertical-spinner')
+      browser.clearValue('input#vertical-spinner')
+      browser.setValue('input#vertical-spinner', '1')
+      browser.click("a.ui-spinner-up")
+      browser.timeoutsImplicitWait(10000)
+      var car1_sp1 = browser.getText('input#vertical-spinner')
+      assert(car1_sp1, '2')
+
+      browser.click('input#vertical-spinner')
+      browser.clearValue('input#vertical-spinner')
+      browser.setValue('input#vertical-spinner', '1000')
+      var cars2 = browser.getText('input#vertical-spinner')
+      assert(cars2, '1000')
+
+      // - - - - - - - -     [ BookNow Button ] - - - - - - - - - -
+
+      browser.useXpath()
+      browser.waitForElementPresent("//button[@id='book']")
+      browser.click("//button[@id='book']")
+      var booknow = browser.getCssProperty("//button[@id='book']", 'background')
+      assert('rgb(0, 127, 255', booknow.value)
+    }),
+
+    xtest('DatePicker', function (browser) {
+      browser
+        .maximizeWindow()
+        .url("https://jqueryui.com/demos/")
+        .execute('scrollTo(0,500)')
+        .useXpath()
+        .click('//a[text()="Datepicker"]')
+        .useCss()
+        .findElement('#content')
+        .frame(0)
+
+        // .click('#datepicker')
+        // .setValue('#datepicker','30/35/20200')
+        // .keys(browser.keys.ENTER)
+        // .pause(10000)
+        // .end()
+
+        .click('#datepicker')
+        .click(".ui-datepicker-calendar>tbody>tr>td:nth-child(5)>a")
+      var date = browser.getText('#datepicker')
+      assert(date, '09/08/2021')
+
+      // - - - - - - - -     [ Previous-Button ] - - - - - - - - - -
+
+      browser.click('#ui-datepicker-div>.ui-datepicker-header>a:nth-child(1)')
+      // browser.useCss()
+      var month = browser.getText('.ui-datepicker-title > .ui-datepicker-month')
+      assert(month, 'August')
+      var year = browser.getText('.ui-datepicker-title > .ui-datepicker-year')
+      assert(year, '2021')
+
+      browser.click(".ui-datepicker-calendar > tbody > tr > td:nth-child(5) > a")
+      browser.pause(5000)
+      var prvclr = browser.getCssProperty(".ui-datepicker-calendar > tbody > tr > td:nth-child(5) > a", 'background')
+      assert('rgb(0, 127, 255', prvclr.value)
+      var prevdate = browser.getText('#datepicker')
+      assert(prevdate, '08/05/2021')
+
+      // - - - - - - - -     [ Next-Button ] - - - - - - - - - -
+
+      browser.click('#datepicker')
+      browser.clearValue('#datepicker')
+      browser.click('#ui-datepicker-div > .ui-datepicker-header > a:nth-child(2)')
+      var nmonth = browser.getText('.ui-datepicker-title > .ui-datepicker-month')
+      assert(nmonth, 'September')
+      var nyear = browser.getText('.ui-datepicker-title > .ui-datepicker-year')
+      assert(nyear, '2021')
+
+      browser.click(".ui-datepicker-calendar > tbody > tr > td:nth-child(6) > a")
+      var ndate = browser.getText('#datepicker')
+      assert(ndate, '09/09/2021')
+      var nclr = browser.getCssProperty(".ui-datepicker-calendar > tbody > tr > td:nth-child(6)", 'background')
+      assert('rgb(0, 127, 255', nclr.value)
+    }),
+
+    xtest('Dialog', function (browser) {
+      browser
+        .maximizeWindow()
+        .url("https://jqueryui.com/demos/")
+        .execute('scrollTo(0,500)')
+        .useXpath()
+        .click('//a[text()="Dialog"]')
+        .useCss()
+        .findElement('#content')
+        .frame(0)
+      // .useXpath()
+      // .moveToElement('//div[@class="ui-draggable-handle"]', 100, 1000)
+      // .mouseButtonDown(0)
+      // .pause(5000);
+      var dialog = browser.findElement('#dialog>p')
+      assert(dialog, "This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.")
+    }),
+
+    xtest('Progressbar', function (browser) {
+      browser
+        .maximizeWindow()
+        .url("https://jqueryui.com/demos/")
+        .execute('scrollTo(0,500)')
+        .useXpath()
+        .click('//a[text()="Progressbar"]')
+        .useCss()
+        .findElement('#content')
+        .frame(0)
+        .waitForElementPresent('#progressbar')
+        // .setValue('#progressbar style[width=90%]','nightwatch')
+        // .getElementById('progressbar').style.width="90%"
+        .execute(setElementValue, ['#progressbar > div', 'width:90%'])
+      // .setValue('#progressbar','new text to be write.')
+    }),
+    test('Menu',async function (browser) {
+      browser
+        .maximizeWindow()
+        .url("https://jqueryui.com/demos/")
+        .execute('scrollTo(0,500)')
+        .useXpath()
+        .click('//a[text()="Menu"]')
+        .useCss()
+        .findElement('#content')
+        .frame(0)
+        .waitForElementVisible('#ui-id-1')
+        var toys =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('none', toys.value)
+
+        browser.click('#ui-id-2')
+        var books =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', books.value)
+
+        browser.click('#ui-id-3')
+        var cloth =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', cloth.value)
+
+        browser.click('#ui-id-4')
+        browser.pause(2000)
+        var cloth =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', cloth.value)
+
+        browser.waitForElementVisible('#ui-id-5')
+        var homeenter =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('none', homeenter.value)
+
+
+        browser.click('#ui-id-6')
+        var carhifi =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', carhifi.value)
+
+        browser.click('#ui-id-7')
+        var Utilities =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', Utilities.value)
+
+        browser.click('#ui-id-8')
+        var move =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', move.value)
+
+        browser.click('#ui-id-9')
+        browser.pause(2000)
+        var music =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', music.value)        
+
+        browser.click('#ui-id-10')
+        browser.pause(2000)
+        var rock =await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', rock.value)
+
+        browser.click('#ui-id-11')
+        var alternative = await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', alternative.value)
+
+        browser.click('#ui-id-12')
+        var classic = await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', classic.value)
+
+        browser.click('#ui-id-13')
+        browser.pause(2000)
+        var Jazz = await browser.getCssProperty('.ui-state-disabled', 'background')
+        assert('rgb(0, 127, 25', Jazz.value)
+
+        browser.click('#ui-id-14')
+        browser.pause(2000)
+        var freeJazz = await browser.getCssProperty('.ui-menu-item-wrapper', 'background')
+        assert('rgb(0, 127, 25', freeJazz.value)
+
+        browser.click('#ui-id-15')
+        browser.pause(2000)
+        var bigband = await browser.getCssProperty('.ui-menu-item-wrapper', 'background')
+        assert('rgb(0, 127, 25', bigband.value)
+
+        browser.click('#ui-id-16')
+        browser.pause(2000)
+        var morden = await browser.getCssProperty('.ui-menu-item-wrapper', 'background')
+        assert('rgb(0, 127, 25', morden.value)
+
+        browser.click('#ui-id-17')
+        browser.pause(2000)
+        var pop = await browser.getCssProperty('.ui-menu-item-wrapper', 'background')
+        assert('rgb(0, 127, 25', pop.value)
+
+        browser.waitForElementVisible('#ui-id-5')
+        var special =await browser.getCssProperty('.ui-menu-item-wrapper', 'background')
+        assert('none', special.value)
     })
 });
+
 
