@@ -1,4 +1,4 @@
-  const assert = require('chai').assert;
+    const assert = require('chai').assert;
   describe('Jquery Site', function () {
 
     xtest('Window handle', function (browser) {
@@ -518,7 +518,7 @@
           assert('none', special.value)
       }),
 
-      test('Menu',async function (browser) {
+      xtest('Menu',async function (browser) {
         browser
           .maximizeWindow()
           .url("https://jqueryui.com/demos/")
@@ -653,7 +653,8 @@
           var otherbg = await browser.getCssProperty('.ui-menu-item-wrapper', 'background')
           assert('rgb(0, 127, 25', otherbg.value)
       }),
-      xtest('Spinner',function (browser) {
+
+      xtest('Spinner',async function (browser) {
         browser
         .maximizeWindow()
           .url("https://jqueryui.com/demos/")
@@ -661,49 +662,107 @@
           .useXpath()
           .click('//a[text()="Spinner"]')
           .useCss()
-          .findElement('#spinner')
+          .findElement('.demo-list')
           .frame(0)
           .waitForElementVisible('#spinner')
 
+          browser.useCss()
+          browser.click('#getvalue')
+          browser.getAlertText((results) => {
+            var alertText = results.value
+            console.log("Alert TEXT Value......"+alertText)//just a quick test to see what it grabbed
+            assert(alertText,'null')
+        })
+          browser.acceptAlert()
+
           .click('#disable')
-          var dis = browser.findElement('.ui-spinner ui-corner-all ui-widget ui-widget-content')
-          assert.notEqual(dis,'ui-spinner ui-corner-all ui-widget ui-widget-content ui-spinner-disabled ui-state-disabled')
+          var dis = browser.getAttribute('#spinner','disabled')
+          assert.notEqual(dis,'true')
 
           browser.click('#disable')
-          var dis1 = browser.findElement('.ui-spinner ui-corner-all ui-widget ui-widget-content')
-          assert.equal(dis1,'ui-spinner ui-corner-all ui-widget ui-widget-content')
+          var dis1 = browser.getAttribute('#spinner','disabled')
+          assert.notEqual(dis1,'false')
 
           browser.click('#destroy')
-          browser.xpath()
-          var disno = browser.findElement('//input[@name="value"]')
+          browser.useXpath()
+          var disno = browser.getValue('//input[@name="value"]')
           assert.notEqual(disno,'values')
 
           browser.useCss()
           browser.click('#destroy')
-          browser.xpath()
-          var disno1 = browser.findElement('//input[@name="value"]')
-          assert.equal(disno1,'value')
-
-          browser.click('#disable')
-          var disno2 = browser.findElement('//input[@name="value"]') 
-          assert.notEqual(disno2,'value')
-
-          browser.click('#setvalue')
-          var disno3 = browser.findElement('//input[@name="value"]')
-          assert.notEqual(disno3,'value')
+          browser.useXpath()
+          var disno1 = browser.getValue('//input[@class="ui-spinner-input"]')
+          assert(disno1,'ui-spinner-input')
 
           browser.useCss()
           browser.click('#destroy')
-          browser.setValue('#spinner','subha123')
-          browser.xpath()
-          var disno4 = browser.getText('//input[@id="spinner"]')
-          assert.equal(disno4,'subha123')
-          browser.click('#destroy')
+          browser.useXpath()
+          browser.useCss()
+          browser.setValue('#spinner','1234567890')
+          browser.useXpath()
+          var disno6 = browser.getText('//input[@id="spinner"]')
+          assert(disno6,'1234567890')
 
-          browser.click('#setvalue')
-          var disno5 = browser.getText('//input[@id="spinner"]')
-          assert.equal(disno5,'5')
+          browser.useCss()
+          browser.click('#destroy')
+          browser.click('#getvalue')
+          browser.getAlertText((results) => {
+            var alertText = results.value
+            console.log("Alert TEXT Value......"+alertText)//just a quick test to see what it grabbed
+            assert(alertText,'1234567890')
+        })
+          browser.acceptAlert()
+
+
+          browser.useCss()
+          browser.click('#destroy')
+          browser.useXpath()
+          browser.useCss()
+          browser.setValue('#spinner','subha123')
+          browser.useXpath()
+          var disno4 = browser.getText('//input[@id="spinner"]')
+          assert(disno4,'subha123')
+
+          browser.useCss()
+          browser.click('#destroy')
+          browser.click('#getvalue')
+          browser.getAlertText((results) => {
+            var alertText = results.value
+            console.log("Alert TEXT Value......"+alertText)//just a quick test to see what it grabbed
+            assert(alertText,'null')
+        })
+          browser.acceptAlert()
+
+          browser.useCss()
+          await browser.click('#setvalue')
+          var setvalbg = browser.getCssProperty('.ui-button', 'background')
+          assert('rgb(0, 127, 25', setvalbg.value)
+          browser.useXpath()
+          var disno3 = browser.getText('//input[@id="spinner"]')
+          assert(disno3,'5')
+
+          browser.useCss()
+          browser.click('span.ui-icon-triangle-1-n')
+          browser.useXpath()
+          var disno7 = browser.getText('//input[@id="spinner"]')
+          assert(disno7,'6')
+
+          browser.useCss()
+          browser.click('span.ui-icon-triangle-1-s')
+          browser.useXpath()
+          var disno7 = browser.getText('//input[@id="spinner"]')
+          assert(disno7,'5')
+
+          browser.useCss()
+          browser.click('#getvalue')
+          browser.getAlertText((results) => {
+            var alertText = results.value
+            console.log("Alert TEXT Value......"+alertText)//just a quick test to see what it grabbed
+            assert(alertText,'5')
+        })
+          browser.acceptAlert()
       }),
+
       test('Tabs',function (browser) {
         browser
         .maximizeWindow()
@@ -712,24 +771,30 @@
           .useXpath()
           .click('//a[text()="Tabs"]')
           .useCss()
-          .findElement('#spinner')
+          .findElement('.demo-list')
           .frame(0)
-          .waitForElementVisible('#spinner')
+          // .waitForElementVisible('#spinner')
 
           .useXpath()
           .click('//a[text()="Nunc tincidunt"]')
-          var para = document.getText('#tabs-1 > p')
-          assert(para,'')
+          .useCss()
+          var para = browser.getText('#tabs-1 > p') //console.log(para)
+          assert(para,'Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus')
 
+          browser.useXpath()
           browser.click('//a[text()="Proin dolor"]')
-          var para1 = document.getText('#tabs-2 > p')
-          assert(para1,'')
+          browser.useCss()
+          var para1 = browser.getText('#tabs-2 > p')
+          console.log(para1)
+          browser.expect.text.to.contain(para1,'Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam.')
 
+          browser.useXpath()
           browser.click('//a[text()="Aenean lacinia"]')
-          var para2 = document.getText('#tabs-3 > p')
-          assert(para2,'')
+          browser.useCss()
+          var para2 = browser.getText('#tabs-3 > p')
+          assert(para2,'Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna.')
       }),
-      test('ToolTip',function (browser) {
+      xtest('ToolTip',function (browser) {
         browser
         .maximizeWindow()
           .url("https://jqueryui.com/demos/")
