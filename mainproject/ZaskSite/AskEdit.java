@@ -14,21 +14,21 @@ public class AskEdit {
 		driver_inst.Click_evt("#proceed-link");
 		driver_inst.wait_Click_evt("//a[@class='btn opc-text']");
 		Login(); 
-		driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 
 //		getscore();
 //		likebtn();	
 //		dislike();
-//		favourite(); 
-		Edit_page();
+		favourite(); 
+//		Edit_page();
 //		Check_Title();
 //		Check_Bold();
 //		Check_Italic();
 //		Check_Underline();
 //		Check_strike();
-		Bold_Itallic();
-		strick_underline();
+//		Bold_Itallic();
+//		strick_underline();
 //		check_tags();
 //		check_message();
+//		check_message_spl();
 //		Valid_check();
 //		edit_content_check();
 		Quit();
@@ -46,9 +46,16 @@ public class AskEdit {
 		}
 	} 
 	//- - - - - - - - - - - 	Get Score Value		- - - - - - - -	
-	public static void getscore() throws InterruptedException {		
-		String question_id = driver_inst.selector("//*[@lt-prop-dp='[4177811000]']").getAttribute("lt-prop-dp");
-		System.out.println("question_id....."+question_id);
+	public static void getscore() throws InterruptedException {	
+		Thread.sleep(1000);
+		String qus_id = driver_inst.selector("#zask-questions-pagination > zask-ui-question-summaries > div > zask-ui-question-summary-view:nth-child(1) > zask-ui-card > div > div.question-detail > link-to").getAttribute("lt-prop-dp");
+		System.out.println(qus_id);
+		qus_id = qus_id.replace("]", "");
+		qus_id = qus_id.replace("[", "");
+		System.out.println(qus_id);
+		WebElement prob_id = driver_inst.selector("//*[@lt-prop-dp="+ qus_id +"]");//../../div.view-info/
+		System.out.println(prob_id);
+		Thread.sleep(1000);
 		String score = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2)  > div.sp18").getText();	
 		System.out.println("SCORE VALUE......"+score);
 		driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 
@@ -56,39 +63,41 @@ public class AskEdit {
 	}
 	//- - - - - - - - - - - 	Like Check		- - - - - - - -	
 	public static void likebtn() throws InterruptedException{ 	
-		driver_inst.refresh();
+		driver_inst.refresh();////*[@id="vote-4177811000"]/span
 		WebElement like_select = driver_inst.selector(".like");
 		like_select.click();
-		String Actual_like_class = like_select.getAttribute("class");
-		System.out.println("IF before class........."+Actual_like_class);
-		if(Actual_like_class.equals("up info-ico icon like vote likeClicked")) {
-			System.out.println("IF CLASS........"+Actual_like_class);
-			driver_inst.navigate();
-			driver_inst.refresh();
-			String score_txt = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2) > div.sp18").getText();	
-			System.out.println(score_txt);
-			Assert.assertEquals("1",score_txt);
-			System.out.println("Score added:--Pass-- \n");
-			driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 
-		} else { 
-			driver_inst.navigate();
-			String else_score_txt = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2) > div.sp18").getText();
-			System.out.println(else_score_txt);
-			Assert.assertEquals("0",else_score_txt);
-			System.out.println("Score not added:--Fail-- \n");
-			driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 				
-		}    			
+		Thread.sleep(4000);
+		String Actual_like_class = like_select.getAttribute("class");		
+//		System.out.println("IF before class........."+Actual_like_class);
+//		if(Actual_like_class.equals("up info-ico icon like vote likeClicked")) {
+//			System.out.println("IF CLASS........"+Actual_like_class);
+//			driver_inst.navigate();
+//			driver_inst.refresh();
+//			String score_txt = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2) > div.sp18").getText();	
+//			System.out.println(score_txt);
+//			Assert.assertEquals("1",score_txt);
+//			System.out.println("Score added:--Pass-- \n");
+//			driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 
+//		} else { 
+//			driver_inst.navigate();
+//			String else_score_txt = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2) > div.sp18").getText();
+//			System.out.println(else_score_txt);
+//			Assert.assertEquals("0",else_score_txt);
+//			System.out.println("Score not added:--Fail-- \n");
+//			driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 				
+//		}    			
 		//- - - - - - - - - - - 	Check Like class change 		- - - - - - - - - -	
-		try {	
-			Assert.assertEquals("up info-ico icon like vote likeClicked",Actual_like_class);
-			System.out.println("Like Button class changed:--Pass-- \n");
-		} catch(Exception e) {
-			System.out.println("Like Button class not changed:--Fail-- \n");
-		}	
+//		try {	
+//			Assert.assertEquals("up info-ico icon like vote likeClicked",Actual_like_class);
+//			System.out.println("Like Button class changed:--Pass-- \n");
+//		} catch(Exception e) {
+//			System.out.println("Like Button class not changed:--Fail-- \n");
+//		}	
 		//- - - - - - - - - - - 	Check Like class change(Remove like)		- - - - - - - - - -	
 		try {			
 			WebElement Remove_like_select = driver_inst.selector(".like");
-			Remove_like_select.click();
+//			Remove_like_select.click();
+			Thread.sleep(3000);
 			String Actual_remove_like_class = like_select.getAttribute("class");
 			System.out.println("IF before class........."+Actual_remove_like_class);
 			Assert.assertEquals("up info-ico icon like vote likeClicked",Actual_remove_like_class);
@@ -123,28 +132,96 @@ public class AskEdit {
 		}
 	}
 	//- - - - - - - - - - - 	Dislike Check		- - - - - - - -	
-	public static void dislike() {		
-		try {
-			WebElement like_select = driver_inst.selector(".dislike");
-			like_select.getAttribute("class");
-			String Actual_like_class= like_select.toString();
-			Assert.assertNotSame("dislike",Actual_like_class);
-			System.out.println("Dislike Button class changed:--Pass-- \n");
+	public static void dislike() throws InterruptedException {					
+		driver_inst.refresh();////*[@id="vote-4177811000"]/span
+		WebElement dislike_select = driver_inst.selector(".dislike");
+		dislike_select.click();
+		Thread.sleep(4000);
+		String Actual_dislike_class = dislike_select.getAttribute("class");		
+//		System.out.println("IF before class........."+Actual_dislike_class);
+//		if(Actual_dislike_class.equals("up info-ico icon like vote likeClicked")) {
+//			System.out.println("IF CLASS........"+Actual_dislike_class);
+//			driver_inst.navigate();
+//			driver_inst.refresh();
+//			String dislike_score_txt = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2) > div.sp18").getText();	
+//			System.out.println(dislike_score_txt);
+//			Assert.assertEquals("-1",dislike_score_txt);
+//			System.out.println("Dislike Score added:--Pass-- \n");
+//			driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 
+//		} else { 
+//			driver_inst.navigate();
+//			String else_dislike_score_txt = driver_inst.selector("zask-ui-card > div > div.view-info > div:nth-child(2) > div.sp18").getText();
+//			System.out.println(else_dislike_score_txt);
+//			Assert.assertEquals("0",else_dislike_score_txt);
+//			System.out.println("Dislike Score not added:--Fail-- \n");
+//			driver_inst.wait_Click_evt("div.question-detail > link-to > a"); 				
+//		}    			
+		//- - - - - - - - - - - 	Check dislike class change 		- - - - - - - - - -	
+//		try {	
+//			Assert.assertEquals("down info-ico icon dislike dislikeClicked vote",Actual_dislike_class);
+//			System.out.println("Like Button class changed:--Pass-- \n");
+//		} catch(Exception e) {
+//			System.out.println("Like Button class not changed:--Fail-- \n");
+//		}	
+		//- - - - - - - - - - - 	Check dislike class change(Remove like)		- - - - - - - - - -	
+		try {			
+			WebElement Remove_dislike_select = driver_inst.selector(".dislike");
+			Remove_dislike_select.click();
+			Thread.sleep(3000);
+			String Actual_remove_dislike_class = Remove_dislike_select.getAttribute("class");
+			System.out.println("IF before class........."+Actual_remove_dislike_class);
+			Assert.assertEquals("down info-ico icon dislike vote dislikeClicked",Actual_remove_dislike_class);
+			System.out.println("Remove Dislike Button class changed:--Pass-- \n");
 		} catch(Exception e) {
-			System.out.println("Dislike Button class not changed:--Fail-- \n");
-		} 		
+			System.out.println("Remove Dislike Button class not changed:--Fail-- \n");
+		}	
+		//- - - - - - - - - - - 	Check dislike Vote value 		- - - - - - - - - -	
+		try {			
+			WebElement vote_dislike_select = driver_inst.selector(".dislike");
+			vote_dislike_select.getAttribute("vote_value");
+			String Actual_remove_vote_ = vote_dislike_select.getAttribute("class");
+			System.out.println("IF before class........."+Actual_remove_vote_);
+			Assert.assertEquals("down info-ico icon dislike vote dislikeClicked",Actual_remove_vote_);
+			System.out.println("Vote value dislike Button class changed:--Pass-- \n");
+		} catch(Exception e) {
+			System.out.println("Vote value Dislike Button class not changed:--Fail-- \n");
+		}	
+		//- - - - - - - - - - - 	Background Color Check		- - - - - - - -		
+		try {	
+			JavascriptExecutor js = (JavascriptExecutor) driver_inst;
+			String text = js.executeScript(
+					"return window.getComputedStyle(document.querySelector('div.dislike'),'::before').getCssValue('background-color')")
+					.toString();
+			System.out.print(text);
+			WebElement before_bgcolor = driver_inst.wait_Click_evt("div.dislike:before");
+			String Actual_color = before_bgcolor.getCssValue("background-color");
+			System.out.println("Background color........"+ Actual_color+"\n");
+			System.out.println("Dislike button Before color get:--Pass-- \n");
+		} catch(Exception e) {			
+			System.out.println("Dislike button Before color not get:--Fail-- \n");			
+		}
 	}
 	//- - - - - - - - - - - 	Favorite Check		- - - - - - - -	
 	public static void favourite() {		
 		try {			
+			driver_inst.refresh();////*[@id="vote-4177811000"]/span
+			WebElement dislike_select = driver_inst.selector(".dislike");
+			dislike_select.click();
 			WebElement favourite_select = driver_inst.selector(".favourite");
 			favourite_select.click();
+			Thread.sleep(3000);
 			String favourite_class = favourite_select.getAttribute("class");
 			Assert.assertEquals("info-ico icon favouriteClicked",favourite_class);
+			driver_inst.navigate();
+			driver_inst.Click_evt("#question-filter");
+			driver_inst.Click_evt("//*[@id=\"filter\"]/div/lyte-accordion[1]/lyte-yield/lyte-accordion-item");
+			driver_inst.Click_evt("//span[text()='Favourite']");
+			driver_inst.Click_evt("filter-button apply");
 			System.out.println("Dislike Button class changed:--Pass-- \n");
 		} catch(Exception e) {
 			System.out.println("Dislike Button class not changed:--Fail-- \n");
 		} 
+		
 	}
 	//- - - - - - - - - - - 	Edit Icon Click		- - - - - - - -	
 	public static void Edit_page() {
@@ -405,8 +482,7 @@ public class AskEdit {
 		}
 		//			driver_inst.refresh();
 	}
-	//- - - - - - - - - - - 	Check Underline   - - - - - - - - - - - -
-	
+	//- - - - - - - - - - - 	Check Underline   - - - - - - - - - - - -	
 	public static void Check_Underline() throws InterruptedException {
 	//- - - - - - - - - - 		Italic Icon Click		- - - - - - - - - -
 		try { 		
@@ -720,10 +796,64 @@ public class AskEdit {
 		} catch(Exception e) {
 			System.out.println("'Reason' min value check : --Fail--");
 		}
+		//- - - - - - - - - - -			Number check		- - - - - - - - - - -	
+		try {
+			driver_inst.Click_evt("#add-question-title");
+			driver_inst.Clear_evt("#add-question-title");			
+			driver_inst.send_Val("#add-question-title", "How to get a list of questions?");
+			
+			driver_inst.Click_evt("#editor-outlet > .ql-editor > p");
+			driver_inst.Clear_evt("#editor-outlet > .ql-editor > p");
+			driver_inst.send_Val("#editor-outlet > .ql-editor > p", "How to get a list of questions?");
+			//- - - - - - - - - - - 	Send Tag   - - - - - - - -	- - - - 
+			driver_inst.Click_evt("//input[@placeholder='Add tags.']");
+			driver_inst.backspace("//input[@placeholder='Add tags.']",Keys.BACK_SPACE);
+			driver_inst.send_Val("//input[@placeholder='Add tags.']","htm");
+			driver_inst.Click_evt("//*[@content=\'html\']");
+			
+			driver_inst.Click_evt("#add-question-edit-summary");
+			driver_inst.Clear_evt("#add-question-edit-summary");
+			driver_inst.send_Val("#add-question-edit-summary","123456");
+			driver_inst.Click_evt("#add-question-submit"); 
+			boolean reason_num = driver_inst.pagecontent().contains("Enter valid reason content of at least 5 characters");
+			Assert.assertFalse(reason_num);			
+			System.out.println("'Reason number check' is not show alert message: --Pass--");
+		} catch(Exception e) {
+			System.out.println("'Reason number check' is show alert message:--Fail--");
+		}
+	}
+	//- - - - - - - - - - -			Special charter check		- - - - - - - - - - -
+	public static void check_message_spl() throws InterruptedException {
+		try {
+			driver_inst.Click_evt("//span[@class='icon edit']");
+			driver_inst.Click_evt("#add-question-title");
+			driver_inst.Clear_evt("#add-question-title");			
+			driver_inst.send_Val("#add-question-title", "How to get a list of questions?");
+
+			driver_inst.Click_evt("#editor-outlet > .ql-editor > p");
+			driver_inst.Clear_evt("#editor-outlet > .ql-editor > p");
+			driver_inst.send_Val("#editor-outlet > .ql-editor > p", "How to get a list of questions?");
+			//- - - - - - - - - - - 	Send Tag   - - - - - - - -	- - - - 
+			driver_inst.Click_evt("//input[@placeholder='Add tags.']");
+			driver_inst.backspace("//input[@placeholder='Add tags.']",Keys.BACK_SPACE);
+			driver_inst.send_Val("//input[@placeholder='Add tags.']","htm");
+			driver_inst.Click_evt("//*[@content=\'html\']");
+
+			driver_inst.Click_evt("#add-question-edit-summary");
+			driver_inst.Clear_evt("#add-question-edit-summary");
+			driver_inst.send_Val("#add-question-edit-summary","123456");
+			driver_inst.Click_evt("#add-question-submit"); 
+			boolean reason_spl = driver_inst.pagecontent().contains("Enter valid reason content of at least 5 characters");
+			Assert.assertFalse(reason_spl);			
+			System.out.println("'Reason specil char check' is not show alert message: --Pass--");
+		} catch(Exception e) {
+			System.out.println("'Reason specil char check' is show alert message:--Fail--");
+		}
 	}
 	//- - - - - - - - - - -		Valid check		- - - - - - - - - - -
 	public static void Valid_check() throws InterruptedException {
 	try {
+		driver_inst.Click_evt("//span[@class='icon edit']");
 		driver_inst.Click_evt("#add-question-title");
 		driver_inst.Clear_evt("#add-question-title");			
 		driver_inst.send_Val("#add-question-title", "How to get id value in title tag");
