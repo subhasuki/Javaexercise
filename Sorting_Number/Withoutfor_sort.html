@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+</html>
+
+<script>
+
+var list = [6,8,5,3,7,9];
+document.write("old array list:"+list);
+document.write("<br>");
+var max = list[0];
+function sortnum(){
+    var i= 0;
+    var min = list[i];
+    console.log(min);
+    var num = 1;
+
+    function sortnum1(){
+
+        if(num < list.length) {
+            if(min >= list[num]){
+                min = list[num];
+                i = num;
+            }
+            num++;
+            sortnum3();
+        }
+        if(max<= min){
+            max = min;
+        }
+        
+    }
+    
+    function sortnum3(){
+        sortnum1();
+    }
+
+    sortnum1();
+    document.write(min);
+    list.splice(i, 1);
+    if(list.length != 0 ){
+        sortnum4();
+    }
+}
+function sortnum4(){
+    sortnum();
+}
+sortnum();
+document.write("<br>")
+document.write("Array max value:"+max);
+document.write("<br>")
+document.write("New Array length"+Array.from(Array(max).keys()))
+</script>

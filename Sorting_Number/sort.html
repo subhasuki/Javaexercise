@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Numbers</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+var list = [6,8,5,3,7,9];
+document.write("Array numbers......." + list);
+document.write("<br>")
+var maxval = Math.max.apply(Math,list);
+document.write("Maxvalue "+ maxval);
+document.write("<br>");
+document.write(Array.from(Array(maxval).keys()))
+var sn = [];
+for (var i = 0; i <6;i++){
+    sortnum();
+}
+function sortnum(){
+
+var num = list[0];
+for (var i = 0; i < list.length; i++) {
+    if(num > list[i]) {
+        num = list[i];
+        var ss = i;
+        document.write("<br>");
+    }
+}
+document.write(list.splice(ss,1));
+  document.write("<br>");
+}
+sortnum(list);
+
+
+</script>
